@@ -20,6 +20,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://api.github.com; font-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>Backlog</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%238391ff%22/%3E%3Cstop offset=%221%22 stop-color=%22%23ff7aa8%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2264%22 height=%2264%22 rx=%2215%22 fill=%22url%28%23g%29%22/%3E%3Crect x=%229%22 y=%2220%22 width=%2246%22 height=%2226%22 rx=%2213%22 fill=%22none%22 stroke=%22%23fff%22 stroke-width=%224%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M22 27v12M16 33h12%22 stroke=%22%23fff%22 stroke-width=%224%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2241%22 cy=%2231%22 r=%222.6%22 fill=%22%23fff%22/%3E%3Ccircle cx=%2247.5%22 cy=%2236.5%22 r=%222.6%22 fill=%22%23fff%22/%3E%3C/svg%3E">
 <style>
@@ -342,6 +343,48 @@ h3{font-size:.95rem;font-weight:620}
 @keyframes enter{from{opacity:0;transform:translateY(8px)}}
 #view.enter>*{animation:enter .4s var(--ease) backwards}
 
+/* ═══════════════ 4b. NOTES, SAUVEGARDES, AJOUT RAPIDE ═══════════════ */
+.nb{--nc:var(--c-jeux);display:inline-grid;place-items:center;min-width:2.3em;height:1.9em;padding:0 .45em;border-radius:9px;font-weight:720;font-size:.86rem;font-variant-numeric:tabular-nums;color:var(--nc);background:color-mix(in srgb,var(--nc) 15%,transparent);border:1px solid color-mix(in srgb,var(--nc) 40%,transparent);flex:none}
+.nb.sm{height:1.6em;min-width:2em;font-size:.76rem;border-radius:7px;margin-left:auto}
+.nb.lg{position:absolute;top:18px;right:18px;height:2.2em;min-width:2.8em;font-size:1.15rem;border-radius:12px}
+.toprows .li{grid-template-columns:auto minmax(0,1fr) auto}
+.rateable{cursor:pointer;transition:background .15s}
+.tlist li.rateable{border-radius:8px}
+.tlist li.rateable:hover,.toprows .li.rateable:hover{background:var(--glass-2)}
+.pod.rateable:hover{border-color:var(--line-2)}
+.pod[class*=k-] .pn{color:var(--acc)}
+.tops-tabs .tl-lab{font-size:.78rem;margin:0 2px 0 6px}
+.tops-tabs .tl-lab:first-child{margin-left:0}
+.notein{display:grid;grid-template-columns:minmax(0,1fr) 84px;gap:14px;align-items:center}
+.notein input[type=range]{width:100%;accent-color:var(--acc,var(--c-jeux))}
+.notein.unset input[type=range]{opacity:.35}
+.notein .input{text-align:center;font-weight:700;font-size:1.05rem}
+.warnbox{display:flex;gap:10px;align-items:flex-start;padding:11px 14px;border-radius:12px;margin-bottom:10px;font-size:.9rem;background:color-mix(in srgb,var(--warn) 12%,transparent);border:1px solid color-mix(in srgb,var(--warn) 40%,transparent)}
+.warnbox.bad{background:color-mix(in srgb,var(--bad) 12%,transparent);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.warnbox .ic{flex:none;margin-top:2px}
+table.cmp{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:6px}
+table.cmp th{font-size:.78rem;color:var(--tx3);font-weight:600;text-align:right;padding:6px 8px}
+table.cmp td{padding:7px 8px;border-top:1px solid var(--line)} table.cmp td.num{text-align:right;white-space:nowrap}
+table.cmp td:first-child{color:var(--tx2)}
+table.cmp .neg{color:var(--bad);font-size:.8rem;font-weight:650} table.cmp .pos{color:var(--ok);font-size:.8rem;font-weight:650}
+.vers{max-height:56vh;overflow:auto;display:grid;gap:2px}
+.vers .li{display:flex;align-items:center;gap:12px;padding:10px 6px;border-bottom:1px solid var(--line)}
+#notices .banner{margin-bottom:14px}
+.banner.bad{border-color:color-mix(in srgb,var(--bad) 50%,transparent);background:color-mix(in srgb,var(--bad) 10%,transparent)}
+.banner.soft{border-color:var(--line-2);background:var(--glass)}
+.fab{position:fixed;right:28px;bottom:28px;z-index:70;width:58px;height:58px;border-radius:20px;border:0;display:grid;place-items:center;color:#fff;cursor:pointer;
+  background:linear-gradient(135deg,var(--c-jeux),var(--c-roman));box-shadow:0 14px 34px color-mix(in srgb,var(--c-jeux) 45%,transparent),0 2px 0 rgba(255,255,255,.25) inset;transition:transform .2s var(--ease)}
+.fab .ic{width:26px;height:26px;stroke-width:2.2}
+.fab:hover{transform:translateY(-2px) scale(1.03)} .fab:active{transform:scale(.96)}
+.fab:focus-visible{outline:3px solid var(--c-bd);outline-offset:3px}
+@media (max-width:760px){ .fab{right:16px;bottom:calc(92px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:18px} .nb.lg{top:14px;right:14px} }
+@media print{ .fab{display:none} }
+
+.hltbbox{display:grid;gap:8px;margin:-4px 0 16px;padding:12px;border-radius:14px;border:1px dashed var(--line-2);background:color-mix(in srgb,var(--glass) 60%,transparent)}
+.hltbbox textarea{min-height:44px;font-size:.86rem;resize:vertical}
+.hltbbox .hint{font-size:.8rem;margin:0}
+.input.flash{border-color:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
+details.qdur{margin:-2px 0 14px} details.qdur summary{cursor:pointer;font-size:.88rem}
 /* ═══════════════ 5. RESPONSIVE ═══════════════ */
 @media (max-width:1180px){
   .app{grid-template-columns:72px minmax(0,1fr)}
@@ -520,7 +563,7 @@ const S = {
   data: null, view: 'accueil', handle: null, dirty: false, linked: false, snapshot: null, _idx: null,
   f: { JEUX: { q: '', plat: new Set(), prio: new Set(), statut: 'tous', sort: 'score' },
        BD: { q: '', statut: 'tous', sort: 'serie' }, ROMAN: { q: '', statut: 'tous', sort: 'serie' } },
-  stats: { cat: 'ALL' }, histo: { q: '' }, tops: { tab: 'toutesEpoques' }, achats: { etat: 'tous' }, series: { q: '', statut: 'tous' }, abos: { statut: 'tous' },
+  stats: { cat: 'ALL' }, histo: { q: '', f: 'tous' }, tops: { tab: null, cat: 'ALL', all: false }, achats: { etat: 'tous' }, series: { q: '', statut: 'tous' }, abos: { statut: 'tous' },
 };
 
 /* — mémoire du fichier lié (IndexedDB) — */
@@ -530,20 +573,61 @@ const idb = {
   async set(k, v) { const db = await this.open(); return new Promise((ok, ko) => { const t = db.transaction('kv', 'readwrite'); t.objectStore('kv').put(v, k); t.oncomplete = ok; t.onerror = () => ko(t.error); }); },
 };
 
-/** Valide et complète la structure (tolérant : un champ manquant ne casse rien). */
+/** Valide, répare ce qui peut l'être sans perte, et refuse un fichier abîmé (message clair).
+    Protège aussi l'affichage : identifiants, statuts et avatar ne peuvent pas contenir de code. */
 function parseData(text) {
   const d = JSON.parse(text);
-  if (!d || typeof d !== 'object' || !d.backlog || !Array.isArray(d.bibliotheque)) throw new Error('Fichier non reconnu : il manque « backlog » ou « bibliotheque ».');
-  d.meta ||= {}; d.meta.rev ||= 0;
+  const fail = m => { throw new Error('Fichier non valide : ' + m); };
+  const isObj = o => !!o && typeof o === 'object' && !Array.isArray(o);
+  if (!isObj(d) || !isObj(d.backlog) || !Array.isArray(d.bibliotheque)) fail('il manque « backlog » ou « bibliotheque ».');
+  for (const k of ['series', 'achats', 'abonnements']) if (d[k] != null && !Array.isArray(d[k])) fail(`« ${k} » devrait être une liste.`);
+  for (const k of ['objectifs', 'tops', 'config', 'profil', 'meta']) if (d[k] != null && !isObj(d[k])) fail(`« ${k} » a un format inattendu.`);
+  for (const k of ['jeux', 'bd', 'romans']) { if (d.backlog[k] != null && !Array.isArray(d.backlog[k])) fail(`« backlog.${k} » devrait être une liste.`); d.backlog[k] ||= []; }
+  d.meta ||= {}; d.meta.rev = Number.isFinite(+d.meta.rev) ? +d.meta.rev : 0;
   d.config ||= {};
   const c = d.config;
-  c.referenceHltb ||= 'mainPlus';
+  c.referenceHltb = ['main', 'mainPlus', 'complet'].includes(c.referenceHltb) ? c.referenceHltb : 'mainPlus';
   c.prioritesJeux ||= { 1: 'Indispensable', 2: 'À faire', 3: "Si j'ai le temps" };
   c.poidsScore ||= { priorite: 35, progression: 25, tempsRestant: 25, anciennete: 15 };
   c.valeursPriorite ||= { 1: 1, 2: 0.6, 3: 0.25, defaut: 0.5 };
   c.dureeParDefautH ||= { bd: 1, roman: 6 };
-  d.objectifs ||= {}; d.series ||= []; d.achats ||= []; d.abonnements ||= []; d.tops ||= {}; d.profil ||= {}; d.profil.pseudo ??= 'Shiwo'; if (!('avatar' in d.profil)) d.profil.avatar = DEFAULT_AVATAR;
-  for (const k of ['jeux', 'bd', 'romans']) d.backlog[k] ||= [];
+  d.objectifs ||= {}; d.series ||= []; d.achats ||= []; d.abonnements ||= []; d.tops ||= {}; d.profil ||= {};
+  /* — réparations sans perte — */
+  const used = new Set(), okId = v => typeof v === 'string' && /^[A-Za-z0-9_-]{1,40}$/.test(v);
+  let fresh = 0; const fixId = (o, pre) => { if (!okId(o.id) || used.has(o.id)) { do { o.id = pre + 'x' + (++fresh); } while (used.has(o.id)); } used.add(o.id); };
+  const str = (o, k, def = '') => { if (o[k] != null && typeof o[k] !== 'string') o[k] = String(o[k]); if (def !== null && (o[k] == null || o[k] === '')) o[k] = def; };
+  const num = v => (v === '' || v == null || !Number.isFinite(+v)) ? null : +v;
+  const oneOf = (v, list, def) => list.includes(v) ? v : def;
+  const bad = [];
+  for (const [k, pre] of [['jeux', 'g'], ['bd', 'b'], ['romans', 'r']]) d.backlog[k] = d.backlog[k].filter(isObj).map(it => {
+    fixId(it, pre); str(it, 'titre', 'Sans titre'); it.statut = oneOf(it.statut, ['non_commence', 'en_cours'], 'non_commence'); it.priorite = num(it.priorite);
+    if (k === 'jeux') { str(it, 'plateforme', 'AUTRE'); const h = isObj(it.hltb) ? it.hltb : {}; it.hltb = { main: num(h.main), mainPlus: num(h.mainPlus), complet: num(h.complet) }; it.tempsJoue = num(it.tempsJoue) || 0; }
+    else { str(it, 'serie', null); it.tome = num(it.tome); }
+    return it; });
+  d.bibliotheque = d.bibliotheque.filter(isObj).map(b => {
+    fixId(b, 'h'); str(b, 'titre', 'Sans titre'); str(b, 'support', null);
+    if (!CATS[b.categorie]) bad.push(`${b.titre} (${String(b.categorie).slice(0, 20)})`);
+    b.statut = oneOf(b.statut, ['termine', 'abandonne'], 'termine'); b.annee = num(b.annee) != null ? Math.trunc(num(b.annee)) : null;
+    if (b.termineLe != null && !/^\d{4}-\d{2}-\d{2}$/.test(b.termineLe)) b.termineLe = null;
+    if (b.note != null) { const n = num(b.note); if (n == null) delete b.note; else b.note = Math.max(0, Math.min(100, Math.round(n))); }
+    if (b.avis != null && typeof b.avis !== 'string') b.avis = String(b.avis);
+    if (b.tempsHeures != null) b.tempsHeures = num(b.tempsHeures);
+    return b; });
+  if (bad.length) fail(`catégorie inconnue pour ${bad.length > 1 ? bad.length + ' titres' : '1 titre'} de l’historique : ${bad.slice(0, 3).join(', ')}${bad.length > 3 ? '…' : ''}. Catégories possibles : JEUX, BD, ROMAN.`);
+  d.achats = d.achats.filter(isObj).map(a => { fixId(a, 'a'); str(a, 'titre', 'Sans titre'); a.etat = oneOf(a.etat, ['commande', 'non_commande'], 'non_commande'); a.priorite = num(a.priorite); return a; });
+  d.series = d.series.filter(isObj).map(x => { str(x, 'nom', 'Série sans nom'); x.statut = oneOf(x.statut, Object.keys(STATUTS), 'inconnu'); x.tomeAchete = num(x.tomeAchete); return x; });
+  d.abonnements = d.abonnements.filter(isObj).map(a => { str(a, 'service', 'Abonnement'); a.statut = oneOf(a.statut, ['abonne', 'resilie'], 'abonne'); a.prix = num(a.prix); return a; });
+  for (const y of Object.keys(d.objectifs)) { const o = d.objectifs[y]; if (!/^\d{4}$/.test(y) || !isObj(o)) { delete d.objectifs[y]; continue; } for (const k of Object.keys(o)) { const n = num(o[k]); o[k] = n == null || n < 0 ? null : Math.round(n); } }
+  for (const k of Object.keys(d.tops)) {
+    const v = d.tops[k]; if (k === 'majLe') continue;
+    if (typeof v === 'string') d.tops[k] = [{ rang: 1, titre: v }];
+    else if (!Array.isArray(v)) delete d.tops[k];
+    else d.tops[k] = v.filter(isObj).map((t, i) => ({ ...t, rang: num(t.rang) ?? i + 1, titre: String(t.titre ?? '') }));
+  }
+  str(d.profil, 'pseudo', null); d.profil.pseudo ??= 'Shiwo';
+  if (!('avatar' in d.profil)) d.profil.avatar = DEFAULT_AVATAR;
+  else if (d.profil.avatar != null && !/^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(d.profil.avatar)) d.profil.avatar = null;
+  if (d.meta.derniereSauvegarde != null && !/^\d{4}-\d{2}-\d{2}$/.test(d.meta.derniereSauvegarde)) delete d.meta.derniereSauvegarde;
   return d;
 }
 
@@ -564,7 +648,7 @@ async function loadData() {
       return null;                                             // dépôt encore vide : l'écran d'accueil propose d'y envoyer data.json
     } catch (e) {
       try { const dr = JSON.parse(localStorage.getItem('cockpit.draft') || 'null'); if (dr && dr.meta) { S.linked = true; S.dirty = true; setSync(e.code === 'net' ? 'offline' : 'error'); return parseData(JSON.stringify(dr)); } } catch { /* pas de brouillon */ }
-      toast(e.message + ' — impossible de charger les données depuis GitHub.'); return null;
+      S.loadError = e.message; toast(e.message + ' — impossible de charger les données depuis GitHub.'); return null;
     }
   }
   try { S.handle = await idb.get('handle') || null; } catch { S.handle = null; }
@@ -573,18 +657,18 @@ async function loadData() {
       if (await S.handle.queryPermission({ mode: 'readwrite' }) === 'granted') {
         const d = parseData(await (await S.handle.getFile()).text()); S.linked = true; return d;
       }
-    } catch (e) { console.warn('Fichier lié inaccessible', e); }
+    } catch (e) { console.warn('Fichier lié inaccessible', e); if (/non valide|JSON/.test(e.message)) { S.loadError = e.message; toast(e.message); } }
   }
-  try {
-    const r = await fetch('data.json', { cache: 'no-store' });
-    if (r.ok) return parseData(await r.text());
-  } catch (e) { /* ouverture en file:// : on passe à l'écran d'accueil */ }
+  let txt = null;
+  try { const r = await fetch('data.json', { cache: 'no-store' }); if (r.ok) txt = await r.text(); } catch (e) { /* ouverture en file:// : écran d'accueil */ }
+  if (txt != null) { try { return parseData(txt); } catch (e) { S.loadError = e.message; toast('data.json illisible : ' + e.message); } }
   return null;
 }
 
 async function openPicked(file, handle) {
   try {
     const d = parseData(await file.text());
+    if (syncOn() && S.data) return restoreCompare(d, `le fichier « ${file.name} »`);   // synchro active : on compare avant d'écraser GitHub
     if (handle) { S.handle = handle; S.linked = true; idb.set('handle', handle).catch(() => {}); }
     start(d);
     if (syncOn()) { S.dirty = true; paintSave(); pushNow(true); }       // premier envoi vers GitHub
@@ -670,19 +754,40 @@ const syncOn = () => !!syncCfg();
 const b64enc = s => { const u = new TextEncoder().encode(s); let b = ''; for (let i = 0; i < u.length; i += 0x8000) b += String.fromCharCode(...u.subarray(i, i + 0x8000)); return btoa(b); };
 const b64dec = s => { const b = atob(s.replace(/\s/g, '')), u = Uint8Array.from(b, c => c.charCodeAt(0)); return new TextDecoder().decode(u); };
 
-async function gh(method, body, raw) {
+async function gh(method, body, raw, ref) {
   const c = syncCfg(); if (!c) throw Object.assign(new Error('Synchronisation non configurée'), { code: 'cfg' });
-  const url = `https://api.github.com/repos/${c.repo}/contents/${c.path.split('/').map(encodeURIComponent).join('/')}` + (method === 'GET' ? `?ref=${encodeURIComponent(c.branch)}` : '');
+  const url = `https://api.github.com/repos/${c.repo}/contents/${c.path.split('/').map(encodeURIComponent).join('/')}` + (method === 'GET' ? `?ref=${encodeURIComponent(ref || c.branch)}` : '');
   let r;
   try {
     r = await fetch(url, { method, cache: 'no-store', body: body ? JSON.stringify(body) : undefined,
       headers: { Authorization: 'Bearer ' + c.token, Accept: raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', ...(body ? { 'Content-Type': 'application/json' } : {}) } });
   } catch { throw Object.assign(new Error('Pas de connexion'), { code: 'net' }); }
+  noteTokenExpiry(r);
   if (!r.ok) {
     const msg = { 401: 'Jeton refusé ou expiré', 403: 'Accès refusé (droits du jeton ?)', 404: 'Fichier ou dépôt introuvable', 409: 'Conflit', 422: 'Conflit' }[r.status] || ('Erreur GitHub ' + r.status);
     throw Object.assign(new Error(msg), { code: r.status });
   }
   return r;
+}
+/** GitHub indique la date d'expiration du jeton dans chaque réponse (si le navigateur la laisse lire). */
+function noteTokenExpiry(r) {
+  const h = r.headers.get('github-authentication-token-expiration'); if (!h) return;
+  const iso = h.slice(0, 10), c = syncCfg(); if (!c || c.expire === iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return;
+  c.expire = iso; c.expireAuto = true; localStorage.setItem('cockpit.sync', JSON.stringify(c)); paintNotices?.();
+}
+/** Contenu de data.json tel qu'il était dans une version donnée (sha de commit). */
+async function ghReadAt(ref) {
+  const j = await (await gh('GET', null, false, ref)).json();
+  return j.content ? b64dec(j.content) : await (await gh('GET', null, true, ref)).text();
+}
+/** Dernières versions enregistrées de data.json (une par envoi). */
+async function ghVersions(n = 40) {
+  const c = syncCfg(); let r;
+  try { r = await fetch(`https://api.github.com/repos/${c.repo}/commits?path=${encodeURIComponent(c.path)}&sha=${encodeURIComponent(c.branch)}&per_page=${n}`, { cache: 'no-store', headers: { Authorization: 'Bearer ' + c.token, Accept: 'application/vnd.github+json' } }); }
+  catch { throw Object.assign(new Error('Pas de connexion'), { code: 'net' }); }
+  noteTokenExpiry(r);
+  if (!r.ok) throw Object.assign(new Error(r.status === 401 ? 'Jeton refusé ou expiré' : 'Erreur GitHub ' + r.status), { code: r.status });
+  return (await r.json()).map(x => ({ sha: x.sha, date: x.commit?.committer?.date || x.commit?.author?.date, msg: x.commit?.message || '' }));
 }
 /** Lit data.json dans le dépôt. Retourne { sha, text } ; text vaut null si le fichier n'existe pas encore. */
 async function ghRead() {
@@ -716,7 +821,7 @@ async function pushNow(manual) {
     else { setSync(e.code === 'net' ? 'offline' : 'error'); if (manual || e.code !== 'net') toast(e.message + (e.code === 'net' ? ' : les modifications sont gardées sur cet appareil et partiront au retour du réseau.' : '')); }
   } finally { SY.busy = false; if (SY.again) { SY.again = false; syncSoon(); } }
 }
-const syncSoon = debounce(() => pushNow(false), 1500);
+const syncSoon = debounce(() => pushNow(false), 3000);   // regroupe les modifications rapprochées en un seul envoi
 
 /** Va chercher les changements faits ailleurs (retour sur l'onglet, reconnexion). */
 async function pullIfNewer(force) {
@@ -725,19 +830,24 @@ async function pullIfNewer(force) {
   try {
     const r = await ghRead(); if (!r.text || r.sha === SY.sha) { if (SY.state === 'offline' || SY.state === 'error') setSync(S.dirty ? 'wait' : 'ok'); if (S.dirty) pushNow(false); return; }
     if (S.dirty) { SY.remote = r; setSync('conflict'); conflictBanner(); return; }
-    const d = parseData(r.text); SY.sha = r.sha; S.data = d; S._idx = null; S.dirty = false; setSync('ok'); render(); toast('Données mises à jour depuis GitHub');
+    const d = parseData(r.text); SY.sha = r.sha; S.data = d; S._idx = null; S.dirty = false; resetUndo(); setSync('ok'); render(); toast('Données mises à jour depuis GitHub');
   } catch (e) { setSync(e.code === 'net' ? 'offline' : 'error'); }
 }
 function conflictBanner(msg = 'Un autre appareil a modifié les données pendant que tu travaillais ici.') {
   $('#banner').innerHTML = `<div class="banner">${ic('save')}<span>${esc(msg)}</span><span class="spacer"></span><button class="btn sm" id="cf-remote">Garder la version GitHub</button><button class="btn sm ghost" id="cf-local">Écraser avec la mienne</button></div>`;
   $('#cf-remote').onclick = async () => {
-    try { const r = await ghRead(); S.data = parseData(r.text); SY.sha = r.sha; S._idx = null; S.dirty = false; localStorage.removeItem('cockpit.draft'); $('#banner').innerHTML = ''; setSync('ok'); render(); toast('Version GitHub rechargée'); } catch (e) { toast(e.message); }
+    try { const r = await ghRead(); S.data = parseData(r.text); SY.sha = r.sha; S._idx = null; S.dirty = false; resetUndo(); localStorage.removeItem('cockpit.draft'); $('#banner').innerHTML = ''; setSync('ok'); render(); toast('Version GitHub rechargée'); } catch (e) { toast(e.message); }
   };
   $('#cf-local').onclick = async () => {
     try { const r = await ghRead(); SY.sha = r.sha; $('#banner').innerHTML = ''; setSync('wait'); S.dirty = true; await pushNow(true); } catch (e) { toast(e.message); }
   };
 }
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') pullIfNewer(false); });
+const BOOT_DAY = isoDate();
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') { if (syncOn() && S.dirty) pushNow(false); return; }   // on quitte l'appli : envoi immédiat
+  if (isoDate() !== BOOT_DAY && !S.dirty && !$('#modal-root').innerHTML) { location.reload(); return; }   // nouveau jour : année, objectifs, salutation à jour
+  pullIfNewer(false);
+});
 window.addEventListener('online', () => pullIfNewer(true));
 
 /** Teste la configuration saisie. Retourne un message d'erreur ou null. */
@@ -749,6 +859,7 @@ async function syncTest(cfg) {
     if (r.status === 401) throw new Error('Jeton refusé : vérifie qu’il est complet et qu’il n’a pas expiré.');
     if (r.status === 404) throw new Error('Dépôt introuvable : vérifie « pseudo/nom-du-dépôt » et que le jeton a accès à ce dépôt.');
     if (!r.ok) throw new Error('GitHub répond ' + r.status);
+    const hx = r.headers.get('github-authentication-token-expiration'); if (hx) { cfg.expire = hx.slice(0, 10); cfg.expireAuto = true; }
     const j = await r.json(); if (j.permissions && !j.permissions.push) throw new Error('Ce jeton peut lire mais pas écrire : donne-lui « Contents : Read and write ».');
     return null;
   } catch (e) { if (old) localStorage.setItem('cockpit.sync', old); else localStorage.removeItem('cockpit.sync'); return e.code === 'net' || e instanceof TypeError ? 'Pas de connexion à GitHub.' : e.message; }
@@ -759,7 +870,8 @@ function syncFormHTML(c = {}) {
     <div class="field" style="margin-top:10px"><label for="sy-token">Jeton d’accès</label><input class="input" id="sy-token" name="token" type="password" placeholder="github_pat_…" value="${esc(c.token || '')}" required autocapitalize="off" spellcheck="false"><span class="hint">Il reste sur cet appareil, jamais dans data.json.</span></div>
     <details style="margin-top:10px"><summary class="muted" style="cursor:pointer;font-size:.88rem">Options</summary>
       <div class="two" style="margin-top:8px"><div class="field"><label for="sy-path">Fichier</label><input class="input" id="sy-path" name="path" value="${esc(c.path || 'data.json')}" autocapitalize="off"></div>
-      <div class="field"><label for="sy-br">Branche</label><input class="input" id="sy-br" name="branch" value="${esc(c.branch || 'main')}" autocapitalize="off"></div></div></details>
+      <div class="field"><label for="sy-br">Branche</label><input class="input" id="sy-br" name="branch" value="${esc(c.branch || 'main')}" autocapitalize="off"></div></div>
+      <div class="field"><label for="sy-exp">Expiration du jeton</label><input class="input" id="sy-exp" name="expire" type="date" value="${esc(c.expire || '')}"><span class="hint">Remplie automatiquement si GitHub la communique. Sert à te prévenir 30 jours avant.</span></div></details>
     <div class="row" style="margin-top:14px"><button class="btn primary" type="submit">${ic('save')}${c.repo ? 'Mettre à jour' : 'Connecter'}</button><span class="muted" id="sy-msg" style="font-size:.88rem"></span></div></form>`;
 }
 /* Avatar par défaut (PNG détouré), utilisé si data.json n'a pas encore de champ « profil.avatar ». */
@@ -979,11 +1091,12 @@ function lineChart(points, { color = 'var(--c-jeux)', ref = null, fmt = v => v, 
    Navigation, rendu et petits composants communs d'abord.
    ═══════════════════════════════════════════════════════════════════════ */
 const catVar = c => `var(--c-${{ JEUX: 'jeux', BD: 'bd', ROMAN: 'roman' }[c]})`;
+const hasHltb = g => ['main', 'mainPlus', 'complet'].some(k => g.hltb?.[k] != null);
 const findItem = (cat, id) => blk(cat).find(x => x.id === id);
 const nextId = (prefix, arr) => prefix + String(Math.max(0, ...arr.map(x => parseInt(String(x.id).slice(prefix.length), 10) || 0)) + 1).padStart(prefix === 'h' ? 4 : 3, '0');
 const prioLabel = p => S.data.config.prioritesJeux[p] || ('Priorité ' + p);
 const prioPill = p => p ? `<span class="pill p${p}">${ic('flame')}${esc(prioLabel(p))}</span>` : '';
-const statPill = s => s === 'non_commence' ? '' : `<span class="pill s-${s}">${STATUTS[s] || s}</span>`;
+const statPill = s => s === 'non_commence' ? '' : `<span class="pill s-${esc(s)}">${esc(STATUTS[s] || s)}</span>`;
 const head = (title, sub, actions = '') => `<header class="page-head"><div><h1>${title}</h1>${sub ? `<p class="sub">${sub}</p>` : ''}</div><div class="row">${actions}</div></header>`;
 const empty = (icon, txt, action = '') => `<div class="empty">${ic(icon)}<p>${txt}</p>${action}</div>`;
 const matches = (title, q) => { const n = norm(title); return norm(q).split(' ').filter(Boolean).every(w => n.includes(w)); };
@@ -1063,7 +1176,7 @@ VIEWS.accueil = function () {
   const prios = [1, 2, 3].map(p => { const l = d.backlog.jeux.filter(x => x.priorite === p); return { p, n: l.length, h: sum(l.map(x => restantGame(x) || 0)) }; });
   const prioCol = { 1: 'var(--c-jeux)', 2: 'color-mix(in srgb,var(--c-jeux) 62%,transparent)', 3: 'color-mix(in srgb,var(--c-jeux) 32%,transparent)' };
   const pr = d.profil, who = pr.pseudo ? `${hello}, <span class="pseudo">${esc(pr.pseudo)}</span>` : hello;
-  return `<header class="page-head hello">${pr.avatar ? `<img class="avatar" src="${pr.avatar}" alt="Avatar de ${esc(pr.pseudo || 'toi')}">` : ''}<div style="min-width:0"><h1>${who}</h1><p class="sub">${dateTxt} · ${fmtPct(yearFrac(YEAR))} de l’année écoulée</p></div><div class="row"><button class="btn" data-act="goals">${ic('target')}Objectifs ${YEAR}</button></div></header>
+  return `<header class="page-head hello">${pr.avatar ? `<img class="avatar" src="${esc(pr.avatar)}" alt="Avatar de ${esc(pr.pseudo || 'toi')}">` : ''}<div style="min-width:0"><h1>${who}</h1><p class="sub">${dateTxt} · ${fmtPct(yearFrac(YEAR))} de l’année écoulée</p></div><div class="row"><button class="btn" data-act="goals">${ic('target')}Objectifs ${YEAR}</button></div></header>
   ${picks.length ? `<section class="hero">${heroPick(picks[0])}<div class="mini-picks">${picks.slice(1).map(miniPick).join('')}</div></section>`
     : empty('sparkle', 'Le backlog est vide : bravo, ou presque. Ajoute un jeu, une BD ou un roman pour le remplir de nouveau.')}
   <div class="sec-title"><h2>Objectifs ${YEAR}</h2><p>Le trait clair sur l’anneau marque où tu devrais en être à cette date.</p></div>
@@ -1108,7 +1221,7 @@ function filterJeux() {
   if (f.q) l = l.filter(x => matches(x.it.titre, f.q));
   if (f.plat.size) l = l.filter(x => f.plat.has(x.it.plateforme));
   if (f.prio.size) l = l.filter(x => f.prio.has(x.it.priorite));
-  if (f.statut !== 'tous') l = l.filter(x => x.it.statut === f.statut);
+  if (f.statut === 'sans_duree') l = l.filter(x => !hasHltb(x.it)); else if (f.statut !== 'tous') l = l.filter(x => x.it.statut === f.statut);
   const nul = (a, b, dir = 1) => (a ?? Infinity) === (b ?? Infinity) ? 0 : ((a ?? Infinity) - (b ?? Infinity)) * dir;
   const sorts = { score: (a, b) => b.score - a.score, titre: (a, b) => a.it.titre.localeCompare(b.it.titre, 'fr'),
     restant: (a, b) => nul(a.rest, b.rest) || b.score - a.score, progression: (a, b) => pctGame(b.it) - pctGame(a.it) || b.score - a.score,
@@ -1126,7 +1239,7 @@ VIEWS.jeux = function () {
   return `${head('Jeux vidéo', `${plural(ov.backlog, 'jeu')} au backlog · ${fmtH(ov.tempsRestant)} restantes`, `<button class="btn primary" data-act="add" data-cat="JEUX">${ic('plus')}Ajouter un jeu</button>`)}
   <div class="toolbar"><label class="search">${ic('search')}<input class="input" data-in="q" data-cat="JEUX" placeholder="Rechercher un jeu…" value="${esc(f.q)}" aria-label="Rechercher un jeu"></label>
     <select class="select" data-ch="sort" data-cat="JEUX" style="width:auto" aria-label="Trier">${[['score', 'Backlog Score'], ['titre', 'Titre (A→Z)'], ['restant', 'Temps restant'], ['progression', 'Progression'], ['priorite', 'Priorité']].map(([v, l]) => `<option value="${v}" ${f.sort === v ? 'selected' : ''}>Trier : ${l}</option>`).join('')}</select>
-    ${[['tous', 'Tous'], ['en_cours', 'En cours'], ['non_commence', 'Non commencés']].map(([v, l]) => chip('set-statut', `data-cat="JEUX" data-v="${v}"`, f.statut === v, l)).join('')}</div>
+    ${[['tous', 'Tous'], ['en_cours', 'En cours'], ['non_commence', 'Non commencés'], ...(blk('JEUX').some(g => !hasHltb(g)) || f.statut === 'sans_duree' ? [['sans_duree', `Sans durée · ${blk('JEUX').filter(g => !hasHltb(g)).length}`]] : [])].map(([v, l]) => chip('set-statut', `data-cat="JEUX" data-v="${v}"`, f.statut === v, l)).join('')}</div>
   <div class="toolbar">${[1, 2, 3].map(p => chip('tog', `data-cat="JEUX" data-k="prio" data-v="${p}"`, f.prio.has(p), `${ic('flame')}${esc(prioLabel(p))}`)).join('')}<span class="faint">|</span>
     ${plats.map(([p, n]) => chip('tog', `data-cat="JEUX" data-k="plat" data-v="${esc(p)}"`, f.plat.has(p), `${esc(p)} <span class="faint num">${n}</span>`)).join('')}
     ${f.q || f.plat.size || f.prio.size || f.statut !== 'tous' ? `<button class="btn ghost sm" data-act="reset" data-cat="JEUX">Réinitialiser</button>` : ''}</div>
@@ -1232,36 +1345,42 @@ VIEWS.stats = function () {
 };
 
 /* ───────────── Historique ───────────── */
+/** Filtre de l'historique : recherche + « notés / à noter ». */
+const histOk = (b, q) => (!q || matches(b.titre, q)) && (S.histo.f === 'tous' || (S.histo.f === 'notes' ? noteOf(b) != null : (noteOf(b) == null && b.statut === 'termine')));
 function yearBody(y, q) {
-  const l = S.data.bibliotheque.filter(b => (y === 0 ? !b.annee : b.annee === y) && (y !== 0 ? b.statut === 'termine' : true) && (!q || matches(b.titre, q)));
+  const l = S.data.bibliotheque.filter(b => (y === 0 ? !b.annee : b.annee === y) && (y !== 0 ? b.statut === 'termine' : true) && histOk(b, q));
   const col = c => {
     const it = l.filter(b => b.categorie === c).sort((a, b) => (a.termineLe || '9').localeCompare(b.termineLe || '9') || a.titre.localeCompare(b.titre, 'fr'));
     return `<div class="k-${c}"><h3 style="color:var(--acc);margin-bottom:6px">${CATS[c].court} · ${it.length}</h3><ul class="tlist">${it.map(b => {
       const d = b.termineLe ? b.termineLe.slice(8, 10) + '/' + b.termineLe.slice(5, 7) : '—';
       const fl = (b.flags || []).find(f => f.startsWith('date_')); 
-      return `<li class="${fl ? 'fl' : ''}" ${fl ? `data-tip="Date à vérifier dans l’Excel d’origine (${esc(fl.split(':')[1] || 'absente')})"` : ''}><span>${y === 0 ? (b.statut === 'abandonne' ? 'abdn.' : '') : d}</span><span>${esc(b.titre)}${b.support ? ` <span class="faint">· ${esc(b.support)}</span>` : ''}</span></li>`; }).join('') || '<li><span></span><span class="faint">—</span></li>'}</ul></div>`;
+      return `<li class="rateable ${fl ? 'fl' : ''}" data-act="rate" data-id="${b.id}" ${fl ? `data-tip="Date à vérifier dans l’Excel d’origine (${esc(fl.split(':')[1] || 'absente')})"` : `title="Noter ce titre"`}><span>${y === 0 ? (b.statut === 'abandonne' ? 'abdn.' : '') : d}</span><span>${esc(b.titre)}${b.support ? ` <span class="faint">· ${esc(b.support)}</span>` : ''}${b.avis ? ` <span class="faint" title="${esc(b.avis)}">✎</span>` : ''}</span>${noteBadge(noteOf(b), 'sm')}</li>`; }).join('') || '<li><span></span><span class="faint">—</span></li>'}</ul></div>`;
   };
   return `<div class="cols3">${CAT_LIST.map(col).join('')}</div>`;
 }
 function tlHTML() {
   const I = idx(), q = S.histo.q, years = [...I.years].sort((a, b) => b - a);
   const totals = y => sum(CAT_LIST.map(c => doneYear(y, c))), maxTot = Math.max(...years.map(totals));
-  const rows = years.filter(y => !q || S.data.bibliotheque.some(b => b.annee === y && b.statut === 'termine' && matches(b.titre, q))).map(y => {
-    const open = q || y === YEAR;
+  const filt = q || S.histo.f !== 'tous', hit = y => S.data.bibliotheque.some(b => b.annee === y && b.statut === 'termine' && histOk(b, q));
+  const shown = years.filter(y => !filt || hit(y)), first = shown[0];
+  const rows = shown.map(y => {
+    const open = q || (S.histo.f !== 'tous' ? y === first : y === YEAR);
     return `<details class="ty" data-y="${y}" ${open ? 'open' : ''}><summary><span class="yr num">${y}</span>
       <div class="tri">${CAT_LIST.map(c => { const n = doneYear(y, c), o = goalOf(y, c); return `<div class="k-${c}"><b class="num" style="color:var(--acc)">${n}</b><span>${CATS[c].court}${o ? ` · obj. ${o}` : ''}</span>${o ? `<div class="bar"><i style="--w:${Math.min(100, n / o * 100)}%;--col:var(--acc)"></i></div>` : ''}</div>`; }).join('')}</div>
       <span class="faint num">${fmtInt(totals(y))} titres${totals(y) === maxTot ? ' · record' : ''}${y === YEAR ? ' · en cours' : ''}</span></summary>
       <div class="body" data-body>${open ? yearBody(y, q) : ''}</div></details>`;
   });
   const un = I.undated;
-  if (!q || S.data.bibliotheque.some(b => !b.annee && matches(b.titre, q)))
-    rows.push(`<details class="ty" data-y="0" ${q ? 'open' : ''}><summary><span class="yr num" style="font-size:1.4rem">Avant</span><div class="tri">${CAT_LIST.map(c => `<div class="k-${c}"><b class="num" style="color:var(--acc)">${un[c]}</b><span>${CATS[c].court} terminés</span></div>`).join('')}</div><span class="faint">Archive sans date · ${fmtInt(S.data.bibliotheque.filter(b => !b.annee).length)} lignes</span></summary><div class="body" data-body>${q ? yearBody(0, q) : ''}</div></details>`);
+  if (!filt || S.data.bibliotheque.some(b => !b.annee && histOk(b, q)))
+    rows.push(`<details class="ty" data-y="0" ${q || (filt && !shown.length) ? 'open' : ''}><summary><span class="yr num" style="font-size:1.4rem">Avant</span><div class="tri">${CAT_LIST.map(c => `<div class="k-${c}"><b class="num" style="color:var(--acc)">${un[c]}</b><span>${CATS[c].court} terminés</span></div>`).join('')}</div><span class="faint">Archive sans date · ${fmtInt(S.data.bibliotheque.filter(b => !b.annee).length)} lignes</span></summary><div class="body" data-body>${q ? yearBody(0, q) : ''}</div></details>`);
   return rows.join('') || empty('search', 'Aucun titre trouvé dans l’historique.');
 }
 VIEWS.historique = function () {
   const ov = overview().histo;
   return `${head('Historique', `${fmtInt(ov.jeux + ov.bd + ov.romans)} titres terminés depuis le début`, '')}
-  <div class="toolbar"><label class="search">${ic('search')}<input class="input" data-in="hq" placeholder="Chercher un titre dans tout l’historique…" value="${esc(S.histo.q)}" aria-label="Chercher dans l’historique"></label></div>
+  <div class="toolbar"><label class="search">${ic('search')}<input class="input" data-in="hq" placeholder="Chercher un titre dans tout l’historique…" value="${esc(S.histo.q)}" aria-label="Chercher dans l’historique"></label>
+    ${[['tous', 'Tous'], ['notes', `Notés · ${fmtInt(S.data.bibliotheque.filter(b => noteOf(b) != null).length)}`], ['anoter', `À noter · ${fmtInt(toRate().length)}`]].map(([k, l]) => `<button class="chip" data-act="histo-f" data-v="${k}" aria-pressed="${S.histo.f === k}" style="--acc:var(--c-bd)">${l}</button>`).join('')}</div>
+  <p class="faint row" style="font-size:.84rem;margin:-2px 0 14px;gap:8px;flex-wrap:nowrap">${ic('star')}<span>Touche un titre pour lui donner une note sur 100 et un avis.</span></p>
   <div class="tl" id="tl">${tlHTML()}</div>`;
 };
 
@@ -1318,14 +1437,33 @@ VIEWS.abonnements = function () {
 const topLabel = k => k === 'toutesEpoques' ? 'Tous les temps' : 'Top ' + k;
 const topKeys = () => Object.keys(S.data.tops).filter(k => Array.isArray(S.data.tops[k])).sort((a, b) => a === 'toutesEpoques' ? -1 : b === 'toutesEpoques' ? 1 : b.localeCompare(a));
 VIEWS.tops = function () {
-  const keys = topKeys(); if (!keys.includes(S.tops.tab)) S.tops.tab = keys[0];
+  const manual = topKeys(), yrs = yearsWithNotes(), auto = ['general', ...yrs.map(y => 'y:' + y)];
+  if (![...auto, ...manual].includes(S.tops.tab)) S.tops.tab = S.tops.tab === null && !rankedNotes().length && manual.length ? manual[0] : 'general';
+  const chip = (k, l) => `<button class="chip" data-act="tops-tab" data-v="${esc(k)}" aria-pressed="${S.tops.tab === k}" style="--acc:var(--c-bd)">${l}</button>`;
+  const tabs = `<div class="toolbar tops-tabs"><span class="faint tl-lab">D’après tes notes</span>${chip('general', 'Classement général')}${yrs.map(y => chip('y:' + y, String(y))).join('')}
+    ${manual.length ? `<span class="faint tl-lab">Mes listes</span>${manual.map(k => chip(k, esc(topLabel(k)))).join('')}` : ''}</div>`;
+  const nRate = toRate().length;
+  if (auto.includes(S.tops.tab)) {
+    const y = S.tops.tab === 'general' ? null : +S.tops.tab.slice(2), cats = S.tops.cat === 'ALL' ? CAT_LIST : [S.tops.cat];
+    const all = rankedNotes(y, cats), list = S.tops.all ? all : all.slice(0, 100), avg = all.length ? Math.round(sum(all.map(r => r.note)) / all.length) : null;
+    const podium = list.filter(r => r.rang <= 3).slice(0, 3), rest = list.slice(podium.length);
+    const meta = r => [CATS[r.b.categorie].court, r.b.annee, r.b.support].filter(Boolean).join(' · ');
+    return `${head('Tops', `${y ? 'Meilleures notes ' + y : 'Classement général'} · ${plural(all.length, 'titre noté', 'titres notés')}${avg != null ? ` · moyenne ${avg} / 100` : ''}`, `<button class="btn" data-act="top-edit" data-v="">${ic('plus')}Nouvelle liste</button>`)}
+    ${tabs}
+    <div class="toolbar">${[['ALL', 'Tout'], ...CAT_LIST.map(c => [c, CATS[c].court])].map(([k, l]) => `<button class="chip" data-act="tops-cat" data-v="${k}" aria-pressed="${S.tops.cat === k}" style="--acc:${k === 'ALL' ? 'var(--c-bd)' : catVar(k)}">${l}</button>`).join('')}
+      <span class="spacer"></span>${nRate ? `<button class="btn sm" data-act="to-rate">${ic('star')}${plural(nRate, 'titre')} à noter</button>` : ''}</div>
+    ${list.length ? `<section class="podium">${podium.map(r => `<article class="pod glass p${r.rang} rateable k-${r.b.categorie}" data-act="rate" data-id="${r.b.id}"><span class="pn num">${r.rang}</span>${noteBadge(r.note, 'lg')}<h3>${esc(r.b.titre)}</h3><p class="faint" style="font-size:.84rem;margin-top:6px">${esc(meta(r))}</p></article>`).join('')}</section>
+      ${rest.length ? `<section class="glass pad"><div class="toprows">${rest.map(r => `<div class="li rateable" data-act="rate" data-id="${r.b.id}"><span class="rank num">${r.rang}</span><span class="t">${esc(r.b.titre)} <span class="faint" style="font-size:.82rem">· ${esc(meta(r))}</span></span>${noteBadge(r.note)}</div>`).join('')}</div>
+        ${all.length > list.length ? `<div style="text-align:center;margin-top:14px"><button class="btn sm" data-act="tops-all">Afficher les ${fmtInt(all.length)} titres</button></div>` : ''}</section>` : ''}`
+      : empty('star', y ? `Aucun titre noté pour ${y}.` : 'Aucun titre noté pour l’instant. Note tes titres à la fin d’une partie, ou depuis l’historique quand tu veux : le classement se calcule tout seul.', `<button class="btn" data-act="to-rate">${ic('star')}Noter des titres</button>`)}`;
+  }
   const list = [...(S.data.tops[S.tops.tab] || [])].sort((a, b) => a.rang - b.rang), podium = list.filter(t => t.rang <= 3), rest = list.filter(t => t.rang > 3);
-  return `${head('Tops', `${keys.length} classements · ${list.length} titres dans « ${topLabel(S.tops.tab)} »`, `<button class="btn" data-act="top-edit" data-v="">${ic('plus')}Nouveau classement</button>`)}
-  <div class="toolbar">${keys.map(k => `<button class="chip" data-act="tops-tab" data-v="${k}" aria-pressed="${S.tops.tab === k}" style="--acc:var(--c-bd)">${topLabel(k)}</button>`).join('')}<span class="spacer"></span>
-    <button class="btn sm" data-act="top-edit" data-v="${S.tops.tab}">${ic('edit')}Modifier ce classement</button></div>
+  return `${head('Tops', `Liste « ${esc(topLabel(S.tops.tab))} » · ${plural(list.length, 'titre')} classés à la main`, `<button class="btn" data-act="top-edit" data-v="">${ic('plus')}Nouvelle liste</button>`)}
+  ${tabs}
+  <div class="toolbar"><span class="spacer"></span><button class="btn sm" data-act="top-edit" data-v="${esc(S.tops.tab)}">${ic('edit')}Modifier cette liste</button></div>
   ${list.length ? `<section class="podium">${podium.map(t => `<article class="pod glass p${t.rang}"><span class="pn num">${t.rang}</span><h3>${esc(t.titre)}</h3></article>`).join('')}</section>
   ${rest.length ? `<section class="glass pad"><div class="toprows">${rest.map(t => `<div class="li"><span class="rank num">${t.rang}</span><span class="t">${esc(t.titre)}</span></div>`).join('')}</div></section>` : ''}`
-    : empty('star', 'Ce classement est vide.', `<button class="btn" data-act="top-edit" data-v="${S.tops.tab}">Le remplir</button>`)}`;
+    : empty('star', 'Cette liste est vide.', `<button class="btn" data-act="top-edit" data-v="${S.tops.tab}">La remplir</button>`)}`;
 };
 
 /* ───────────── Suivi des séries ───────────── */
@@ -1383,13 +1521,13 @@ const EXP_DEF = {
   cats: { JEUX: true, BD: true, ROMAN: true },
   theme: 'sombre', format: 'auto', qualite: 1, fichier: 'png',
   avatar: true, pseudo: true, filigrane: true,
-  s: { kpis: true, objectifs: true, mois: true, termines: true, prochain: false, backlog: false, top: false, series: false, achats: false, abos: false },
+  s: { kpis: true, bilan: false, objectifs: true, mois: true, termines: true, prochain: false, backlog: false, top: false, series: false, achats: false, abos: false },
   kpis: { total: false, backlog: false, reste: false },
   objectifs: { style: 'anneaux' },
   termines: { statut: 'termine', tri: 'date-asc', max: 25, cols: 2, date: true, support: true, groupe: 'cat' },
   prochain: {},
   backlog: { tri: 'score', max: 10, cols: 1, statut: 'tous', unParSerie: true, detail: true },
-  top: { cle: 'toutesEpoques', max: 10 },
+  top: { cle: 'auto', max: 10, notes: true },
   series: { statut: 'attente', max: 12 },
   achats: { etat: 'tous', max: 12 },
   abos: { prix: true },
@@ -1613,17 +1751,63 @@ function sBacklog(c, T, y) {
     yy += 18; });
   return y + h + 24;
 }
+/** Liste du top à exporter : notes (période ou général) ou liste manuelle. */
+function expTopList() {
+  const k = EXP.top.cle, max = EXP.top.max;
+  if (k === 'auto' || k === 'general') {
+    const y = k === 'general' ? null : expYear();
+    return { label: k === 'general' ? 'Mon classement général' : `Mes meilleures notes ${expPeriode()}`, rows: rankedNotes(y, expCats()).slice(0, max).map(r => ({ rang: r.rang, titre: r.b.titre, note: r.note, cat: r.b.categorie })) };
+  }
+  return { label: topLabel(k), rows: [...(S.data.tops[k] || [])].sort((a, b) => a.rang - b.rang).slice(0, max) };
+}
 function sTop(c, T, y) {
-  const list = [...(S.data.tops[EXP.top.cle] || [])].sort((a, b) => a.rang - b.rang).slice(0, EXP.top.max); if (!list.length) return y;
-  const pod = list.filter(t => t.rang <= 3), rest = list.filter(t => t.rang > 3), gap = 18;
+  const { label, rows: list } = expTopList(); if (!list.length) return y;
+  const showN = EXP.top.notes;
+  const pod = list.slice(0, Math.min(3, list.length)), rest = list.slice(pod.length), gap = 18;
   const rowH = 52, restH = rest.length ? Math.ceil(rest.length / 2) * rowH + 24 : 0, h = 96 + 250 + 24 + restH;
-  dCard(c, T, EXM, y, EXCW, h); dText(c, topLabel(EXP.top.cle), EXM + 36, y + 62, { size: 34, weight: 680, color: T.tx });
-  pod.forEach((t, i) => { const x = EXM + 28 + i * ((EXCW - 56 - gap * (pod.length - 1)) / pod.length + gap), w = (EXCW - 56 - gap * (pod.length - 1)) / pod.length;
-    dRR(c, x, y + 96, w, 250, 24); c.fillStyle = i === 0 ? T.cat.BD + '33' : T.card; c.fill(); c.lineWidth = 1.5; c.strokeStyle = i === 0 ? T.cat.BD : T.line; c.stroke();
-    dText(c, String(t.rang), x + 26, y + 96 + 108, { size: 110, weight: 760, color: T.cat.BD, base: 'alphabetic' });
+  dCard(c, T, EXM, y, EXCW, h); dText(c, label, EXM + 36, y + 62, { size: 34, weight: 680, color: T.tx, maxW: EXCW - 72 });
+  pod.forEach((t, i) => { const w = (EXCW - 56 - gap * (pod.length - 1)) / pod.length, x = EXM + 28 + i * (w + gap), col = t.cat ? T.cat[t.cat] : T.cat.BD;
+    dRR(c, x, y + 96, w, 250, 24); c.fillStyle = i === 0 ? col + '33' : T.card; c.fill(); c.lineWidth = 1.5; c.strokeStyle = i === 0 ? col : T.line; c.stroke();
+    dText(c, String(t.rang), x + 26, y + 96 + 108, { size: 110, weight: 760, color: col, base: 'alphabetic' });
+    if (showN && t.note != null) { dText(c, String(t.note), x + w - 26, y + 96 + 70, { size: 54, weight: 760, color: T.tx, align: 'right' }); dText(c, '/ 100', x + w - 26, y + 96 + 100, { size: 20, color: T.tx3, align: 'right' }); }
     dWrap(c, t.titre, w - 52, 3, 30, 660).forEach((l, j) => dText(c, l, x + 26, y + 96 + 168 + j * 36, { size: 30, weight: 660, color: T.tx })); });
-  if (rest.length) dList(c, T, EXM + 36, y + 96 + 250 + 24, EXCW - 72, rest.map(t => ({ a: String(t.rang), aw: 650, b: t.titre })), 2, rowH, { aW: 52 });
+  if (rest.length) dList(c, T, EXM + 36, y + 96 + 250 + 24, EXCW - 72, rest.map(t => ({ a: String(t.rang), aw: 650, b: t.titre, c: showN && t.note != null ? t.note + ' / 100' : '', dot: t.cat ? T.cat[t.cat] : null })), 2, rowH, { aW: 52 });
   return y + h + 24;
+}
+/** Faits marquants de la période (bilan de fin d'année). */
+function bilanFacts(T) {
+  const yr = expYear(), cats = expCats(), lib = S.data.bibliotheque.filter(b => cats.includes(b.categorie));
+  const done = lib.filter(b => b.statut === 'termine' && (yr == null ? true : b.annee === yr)), out = [];
+  if (yr != null) {
+    const pm = Array(12).fill(0); done.forEach(b => { if (b.termineLe) pm[+b.termineLe.slice(5, 7) - 1]++; });
+    const mx = Math.max(...pm); if (mx > 0) { const m = pm.indexOf(mx); out.push({ v: MOIS_LONG[m][0].toUpperCase() + MOIS_LONG[m].slice(1), lab: 'mois le plus actif', sub: plural(mx, 'titre terminé', 'titres terminés'), col: T.tx, small: true }); }
+    const hit = cats.filter(k => goalOf(yr, k) && doneYear(yr, k) >= goalOf(yr, k)).length, withGoal = cats.filter(k => goalOf(yr, k)).length;
+    const reached = cats.filter(k => goalOf(yr, k) && doneYear(yr, k) >= goalOf(yr, k)).map(k => CATS[k].court);
+    if (withGoal) out.push({ v: `${hit} / ${withGoal}`, lab: 'objectifs atteints', sub: hit === withGoal ? 'tous atteints, bravo' : reached.length ? reached.join(', ') + ' : atteint' + (reached.length > 1 ? 's' : '') : yr === YEAR ? 'l’année n’est pas finie' : 'pas cette fois', col: hit === withGoal ? T.ok : T.warn });
+  }
+  const noted = done.filter(b => noteOf(b) != null);
+  if (noted.length) {
+    out.push({ v: String(Math.round(sum(noted.map(noteOf)) / noted.length)), lab: 'note moyenne / 100', sub: plural(noted.length, 'titre noté', 'titres notés'), col: T.cat.JEUX });
+    const best = [...noted].sort((a, b) => noteOf(b) - noteOf(a))[0]; out.push({ v: String(noteOf(best)), lab: 'coup de cœur', sub: best.titre, col: T.cat[best.categorie] });
+  }
+  const hrs = sum(done.filter(b => b.tempsHeures).map(b => b.tempsHeures)); if (hrs > 0) out.push({ v: fmtInt(Math.round(hrs)), lab: 'heures de jeu terminées', sub: plural(done.filter(b => b.tempsHeures).length, 'jeu'), col: T.cat.JEUX, unit: 'h' });
+  const ser = {}; done.filter(b => b.categorie !== 'JEUX').forEach(b => { const g = guessSerie(b.titre.replace(/^(BD|Roman)\s+/i, '')); if (g) ser[g.serie] = (ser[g.serie] || 0) + 1; });
+  const topS = Object.entries(ser).sort((a, b) => b[1] - a[1])[0]; if (topS && topS[1] > 1) out.push({ v: String(topS[1]), unit: 'tomes', lab: 'série la plus lue', sub: topS[0], col: T.cat.BD });
+  const ab = lib.filter(b => b.statut === 'abandonne' && (yr == null || (b.abandonneLe || '').startsWith(String(yr)))).length; if (ab && yr != null) out.push({ v: String(ab), lab: ab > 1 ? 'abandons' : 'abandon', sub: 'on ne peut pas tout aimer', col: T.tx2 });
+  return out.slice(0, 6);
+}
+function sBilan(c, T, y) {
+  const tiles = bilanFacts(T); if (!tiles.length) return y;
+  dCard(c, T, EXM, y, EXCW, 76, 30); dText(c, `Faits marquants ${expPeriode()}`, EXM + 36, y + 50, { size: 34, weight: 680, color: T.tx }); y += 96;
+  const per = tiles.length === 4 || tiles.length === 2 ? 2 : Math.min(3, tiles.length), gap = 20, tw = (EXCW - gap * (per - 1)) / per, th = 200;
+  tiles.forEach((t, i) => { const x = EXM + (i % per) * (tw + gap), yy = y + Math.floor(i / per) * (th + gap); dCard(c, T, x, yy, tw, th, 28);
+    const uw = t.unit ? t.unit.length * 20 + 14 : 0;
+    let size = t.small ? 62 : 84; dFont(c, size, 740); while (c.measureText(t.v).width > tw - 56 - uw && size > 34) { size -= 4; dFont(c, size, 740); }
+    dText(c, t.v, x + 28, yy + 34 + size * .8, { size, weight: 740, color: t.col });
+    if (t.unit) dText(c, t.unit, x + 28 + c.measureText(t.v).width + 10, yy + 34 + size * .8, { size: 32, weight: 600, color: T.tx3 });
+    dText(c, t.lab, x + 28, yy + th - 60, { size: 26, weight: 620, color: T.tx, maxW: tw - 56 });
+    dText(c, t.sub, x + 28, yy + th - 26, { size: 22, color: T.tx3, maxW: tw - 56 }); });
+  return y + Math.ceil(tiles.length / per) * (th + gap) + 4;
 }
 function sSeries(c, T, y) {
   const o = EXP.series, all = S.data.series.map(s => ({ s, ...serieInfo(s) })).filter(x => o.statut === 'tous' || (o.statut === 'attente' ? x.wait.length : x.s.statut === o.statut));
@@ -1662,7 +1846,7 @@ function sFooter(c, T, y) {
   dLogo(c, x, y + 4, 44); dText(c, t, x + 56, y + 34, { size: 24, weight: 640, color: T.tx2 }); dText(c, dt, x + 56 + w1, y + 34, { size: 24, color: T.tx3 });
   return y + 64;
 }
-const EXSEC = [['kpis', sKpis], ['objectifs', sObjectifs], ['mois', sMois], ['termines', sTermines], ['prochain', sProchain], ['backlog', sBacklog], ['top', sTop], ['series', sSeries], ['achats', sAchats], ['abos', sAbos]];
+const EXSEC = [['kpis', sKpis], ['bilan', sBilan], ['objectifs', sObjectifs], ['mois', sMois], ['termines', sTermines], ['prochain', sProchain], ['backlog', sBacklog], ['top', sTop], ['series', sSeries], ['achats', sAchats], ['abos', sAbos]];
 /** Dessine tout le contenu (fond transparent) et renvoie la hauteur utilisée. */
 function expLayout(c, T) {
   EXF = getComputedStyle(document.body).fontFamily || 'sans-serif';
@@ -1684,7 +1868,7 @@ function expRender(px = 1) {
 
 /* — écran Export : panneau de réglages + aperçu — */
 const expSw = (p, label) => `<label class="sw"><span>${label}</span><input type="checkbox" data-ex="${p}" ${gp(p) ? 'checked' : ''}></label>`;
-const expSel = (p, label, opts, num) => `<div class="field"><label for="x-${p}">${label}</label><select class="select" id="x-${p}" data-ex="${p}" ${num ? 'data-t="n"' : ''}>${opts.map(([v, l]) => `<option value="${v}" ${String(gp(p)) === String(v) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div>`;
+const expSel = (p, label, opts, num) => `<div class="field"><label for="x-${p}">${label}</label><select class="select" id="x-${p}" data-ex="${p}" ${num ? 'data-t="n"' : ''}>${opts.map(([v, l]) => `<option value="${esc(v)}" ${String(gp(p)) === String(v) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div>`;
 const expSeg = (p, opts) => `<div class="seg">${opts.map(([v, l]) => `<button class="chip" data-act="ex-set" data-p="${p}" data-v="${v}" aria-pressed="${String(gp(p)) === String(v)}">${l}</button>`).join('')}</div>`;
 const expBlock = (key, title, body) => `<section class="glass exp-card ${EXP.s[key] ? 'on' : ''}"><div class="sw head"><h3>${title}</h3><input type="checkbox" data-ex="s.${key}" ${EXP.s[key] ? 'checked' : ''} aria-label="${esc(title)}"></div>${EXP.s[key] && body ? `<div class="exp-body">${body}</div>` : ''}</section>`;
 const MAXOPT = [[5, '5'], [10, '10'], [15, '15'], [25, '25'], [40, '40'], [60, '60'], [100, '100'], [0, 'Tous']];
@@ -1692,7 +1876,7 @@ VIEWS.export = function () {
   const yr = expYear(), tops = topKeys();
   const years = yearsList();
   const isAll = yr == null;
-  return `${head('Export', 'Compose une image à partager : choisis ce qui apparaît, puis télécharge-la.', `<button class="btn" data-act="ex-copy" id="ex-copy">${ic('save')}Copier</button><button class="btn primary" data-act="ex-dl">${ic('download')}Télécharger</button>`)}
+  return `${head('Export', 'Compose une image à partager : choisis ce qui apparaît, puis télécharge-la.', `<button class="btn" data-act="ex-bilan">${ic('sparkle')}Bilan de l’année</button><button class="btn" data-act="excel">${ic('download')}Excel</button><button class="btn" data-act="ex-copy" id="ex-copy">${ic('save')}Copier</button><button class="btn primary" data-act="ex-dl">${ic('download')}Télécharger</button>`)}
   <div class="exp">
     <div class="exp-panel">
       <section class="glass exp-card on"><h3>Général</h3><div class="exp-body">
@@ -1707,6 +1891,7 @@ VIEWS.export = function () {
         ${expSw('avatar', 'Afficher mon avatar')}${expSw('pseudo', 'Afficher mon pseudo')}${expSw('filigrane', 'Signature « Backlog » en bas')}
       </div></section>
       ${expBlock('kpis', 'Chiffres clés', `${expSw('kpis.total', 'Total des titres terminés')}${expSw('kpis.backlog', 'Titres au backlog')}${expSw('kpis.reste', 'Heures de jeu au backlog')}`)}
+      ${expBlock('bilan', 'Faits marquants', '<p class="faint" style="font-size:.85rem">Mois le plus actif, objectifs atteints, note moyenne, coup de cœur, heures de jeu, série la plus lue… selon ce qui est renseigné.</p>')}
       ${expBlock('objectifs', 'Objectifs de l’année', isAll ? '<p class="faint" style="font-size:.85rem">Choisis une année précise pour afficher les objectifs.</p>' : `<div class="field"><label>Style</label>${expSeg('objectifs.style', [['anneaux', 'Anneaux'], ['barres', 'Barres']])}</div>`)}
       ${expBlock('mois', isAll ? 'Terminés par année' : 'Terminés mois par mois', '')}
       ${expBlock('termines', 'Titres terminés', `${expSel('termines.statut', 'Statut', [['termine', 'Terminés'], ['abandonne', 'Abandonnés'], ['tous', 'Terminés et abandonnés']])}
@@ -1717,7 +1902,7 @@ VIEWS.export = function () {
       ${expBlock('backlog', 'Backlog', `${expSel('backlog.tri', 'Tri', [['score', 'Backlog Score'], ['titre', 'Titre (A→Z)'], ['restant', 'Temps restant'], ['priorite', 'Priorité']])}
         ${expSel('backlog.max', 'Titres par catégorie', MAXOPT, true)}${expSel('backlog.cols', 'Colonnes', [[1, '1'], [2, '2']], true)}${expSel('backlog.statut', 'Afficher', [['tous', 'Tout le backlog'], ['en_cours', 'Seulement les titres en cours']])}
         ${expSw('backlog.unParSerie', 'Un seul tome par série (BD, romans)')}${expSw('backlog.detail', 'Plateforme et temps restant')}`)}
-      ${expBlock('top', 'Top', `${expSel('top.cle', 'Classement', tops.map(k => [k, topLabel(k)]))}${expSel('top.max', 'Nombre de titres', [[3, '3'], [5, '5'], [10, '10']], true)}`)}
+      ${expBlock('top', 'Top', `${expSel('top.cle', 'Classement', [['auto', 'Meilleures notes de la période'], ['general', 'Classement général (notes)'], ...tops.map(k => [k, 'Liste : ' + topLabel(k)])])}${expSel('top.max', 'Nombre de titres', [[3, '3'], [5, '5'], [10, '10'], [15, '15'], [20, '20']], true)}${expSw('top.notes', 'Afficher les notes')}`)}
       ${expBlock('series', 'Séries suivies', `${expSel('series.statut', 'Séries', [['attente', 'Avec des tomes à lire'], ['en_cours', 'En parution'], ['tous', 'Toutes']])}${expSel('series.max', 'Nombre de séries', MAXOPT, true)}`)}
       ${expBlock('achats', 'Liste d’achats', `${expSel('achats.etat', 'Afficher', [['tous', 'Tout'], ['non', 'À commander'], ['commande', 'Déjà commandés']])}${expSel('achats.max', 'Nombre de titres', MAXOPT, true)}`)}
       ${expBlock('abos', 'Abonnements', expSw('abos.prix', 'Afficher les montants'))}
@@ -1763,7 +1948,7 @@ document.addEventListener('input', e => { const t = e.target, p = t.dataset?.ex;
    ═══════════════════════════════════════════════════════════════════════ */
 function modal(html, { wide = false, cls = '' } = {}) {
   $('#modal-root').innerHTML = `<div class="modal-back" data-act="mclose-bg"><div class="modal ${wide ? 'wide' : ''} ${cls}" role="dialog" aria-modal="true">${html}</div></div>`;
-  $('#modal-root input:not([type=hidden]):not([type=checkbox]), #modal-root select, #modal-root textarea')?.focus();
+  $('#modal-root input:not([type=hidden]):not([type=checkbox]):not([type=range]), #modal-root select, #modal-root textarea')?.focus();
 }
 const closeModal = () => { $('#modal-root').innerHTML = ''; };
 const fld = (label, name, val = '', { type = 'text', hint = '', attrs = '' } = {}) =>
@@ -1797,7 +1982,7 @@ function itemForm(cat, id) {
     ? `${fld('Titre', 'titre', it.titre, { attrs: 'required' })}
        <div class="two"><div class="field"><label for="f-plateforme">Plateforme</label><input class="input" id="f-plateforme" name="plateforme" list="dl-plat" value="${esc(it.plateforme || '')}" required><datalist id="dl-plat">${knownPlatforms().map(p => `<option value="${esc(p)}">`).join('')}</datalist></div>${prio}</div>
        <div class="two" style="grid-template-columns:repeat(3,1fr)">${fld('Main (h)', 'main', it.hltb?.main, { type: 'number', attrs: 'step="0.5" min="0"' })}${fld('Main + (h)', 'mainPlus', it.hltb?.mainPlus, { type: 'number', attrs: 'step="0.5" min="0"' })}${fld('100 % (h)', 'complet', it.hltb?.complet, { type: 'number', attrs: 'step="0.5" min="0"' })}</div>
-       <p class="hint faint" style="margin:-6px 0 14px;font-size:.78rem">Durées à reprendre de HowLongToBeat. Laisse vide si inconnu.</p>
+       ${hltbBlock(it.titre)}
        <div class="two">${fld('Temps joué (h)', 'tempsJoue', it.tempsJoue || 0, { type: 'number', attrs: 'step="0.5" min="0"' })}${stat}</div>`
     : `${fld('Titre', 'titre', it.titre, { attrs: 'required' })}
        <div class="two">${fld('Série', 'serie', it.serie, { hint: 'Optionnel : regroupe les tomes' })}${fld('Tome', 'tome', it.tome, { type: 'number', attrs: 'min="0" step="1"' })}</div>
@@ -1824,6 +2009,7 @@ function finishForm(cat, id) {
   modal(`<form data-form="finish" data-cat="${cat}" data-id="${id}"><h2>${esc(it.titre)}</h2><p class="muted" style="margin-bottom:18px">Le titre quitte le backlog et rejoint l’historique de l’année.</p>
     ${fld('Terminé le', 'date', isoDate(), { type: 'date', attrs: `required max="${isoDate()}"` })}
     ${cat === 'JEUX' ? fld('Temps de jeu total (h)', 'heures', h0 || '', { type: 'number', attrs: 'step="0.5" min="0"', hint: 'Optionnel. Alimente le temps de jeu terminé dans les statistiques.' }) : ''}
+    ${noteFields(null, '')}
     <div class="acts"><button type="submit" class="btn danger" name="issue" value="abandonne" formnovalidate>${ic('ban')}Abandonner</button><span class="spacer"></span><button type="button" class="btn" data-act="close">Annuler</button><button class="btn primary" type="submit" name="issue" value="termine">${ic('check')}Terminer</button></div></form>`, { cls: 'k-' + cat });
 }
 FORMS.finish = (fd, f, ev) => {
@@ -1833,10 +2019,11 @@ FORMS.finish = (fd, f, ev) => {
   const e = { id: nextId('h', S.data.bibliotheque), titre: it.titre, categorie: cat, support: cat === 'JEUX' ? it.plateforme : null, statut: issue, annee: issue === 'termine' ? +date.slice(0, 4) : null, termineLe: issue === 'termine' ? date : null, source: 'app' };
   if (issue === 'abandonne') e.abandonneLe = date;
   const h = numOrNull(fd.get('heures')); if (cat === 'JEUX' && h) e.tempsHeures = h;
+  applyNote(e, fd);
   S.data.bibliotheque.push(e); S._idx = null; closeModal();
   if (issue === 'abandonne') return commit(`« ${it.titre} » classé comme abandonné`, true);
   const y = e.annee, o = goalOf(y, cat), n = doneYear(y, cat);
-  commit(`« ${it.titre} » terminé${o ? ` — ${CATS[cat].court} ${y} : ${n} / ${o}` : ''}`, true);
+  commit(`« ${it.titre} » terminé${noteOf(e) != null ? ` (${noteOf(e)} / 100)` : ''}${o ? ` — ${CATS[cat].court} ${y} : ${n} / ${o}` : ''}`, true);
 };
 
 /* — Objectifs annuels — */
@@ -1900,16 +2087,21 @@ FORMS.serie = (fd, f) => {
 };
 function topForm(key) {
   const lines = key ? (S.data.tops[key] || []).map(t => `${t.rang}. ${t.titre}`).join('\n') : '';
-  modal(`<form data-form="top" data-key="${esc(key)}"><h2>${key ? 'Modifier ' + topLabel(key) : 'Nouveau classement'}</h2><div style="height:14px"></div>
+  modal(`<form data-form="top" data-key="${esc(key)}"><h2>${key ? 'Modifier ' + esc(topLabel(key)) : 'Nouvelle liste'}</h2><div style="height:14px"></div>
     ${key ? '' : fld('Nom du classement', 'cle', '', { attrs: `required placeholder="${YEAR}"`, hint: `Ex. ${YEAR} pour « Top ${YEAR} ».` })}
     <div class="field"><label for="f-lignes">Titres, un par ligne, du premier au dernier</label><textarea class="input" id="f-lignes" name="lignes" rows="12" style="font-family:var(--mono);font-size:.85rem">${esc(lines)}</textarea><span class="hint">Pour une égalité, écris le rang : « 1. Titre ». Sans rang, l’ordre des lignes est utilisé.</span></div>
     <div class="acts">${key && key !== 'toutesEpoques' ? `<button type="button" class="btn danger" data-act="top-del" data-v="${esc(key)}">${ic('trash')}Supprimer</button>` : ''}<span class="spacer"></span><button type="button" class="btn" data-act="close">Annuler</button><button class="btn primary" type="submit">Enregistrer</button></div></form>`, { wide: true });
 }
 FORMS.top = (fd, f) => {
-  snap(); const key = f.dataset.key || fd.get('cle').trim(); if (!key) return;
+  const key = f.dataset.key || String(fd.get('cle') || '').trim().slice(0, 40); if (!key) return;
+  if (!f.dataset.key) {
+    if (key === 'majLe' || key === 'general' || key.startsWith('y:')) return toast(`« ${key} » est un nom réservé : choisis-en un autre.`);
+    if (S.data.tops[key]) return toast(`Une liste « ${topLabel(key)} » existe déjà : modifie-la plutôt, ou choisis un autre nom.`);
+  }
+  snap();
   let n = 0;
   S.data.tops[key] = fd.get('lignes').split('\n').map(l => l.trim()).filter(Boolean).map(l => { n++; const m = l.match(/^(\d+)\s*[.)\-:]\s*(.+)$/); return { rang: m ? +m[1] : n, titre: (m ? m[2] : l).trim() }; });
-  S.tops.tab = key; closeModal(); commit('Classement enregistré', true);
+  S.tops.tab = key; closeModal(); commit('Liste enregistrée', true);
 };
 
 /** Réduit une image en PNG léger (transparence conservée) pour la stocker dans data.json. */
@@ -1946,18 +2138,22 @@ function settingsModal() {
     ${sl('priorite', 'Priorité')}${sl('progression', 'Progression')}${sl('tempsRestant', 'Temps restant (les titres courts passent devant)')}${sl('anciennete', 'Ancienneté au backlog')}
     <div class="field" style="margin-top:14px"><label for="f-ref">Temps HowLongToBeat de référence</label><select class="select" id="f-ref" data-ch="ref">${[['main', 'Main Story'], ['mainPlus', 'Main + Side (recommandé)'], ['complet', 'Complétion 100 %']].map(([v, l]) => `<option value="${v}" ${c.referenceHltb === v ? 'selected' : ''}>${l}</option>`).join('')}</select><span class="hint">Sert au pourcentage d’avancement, au temps restant et au score.</span></div>
     <h3 style="margin:20px 0 10px">Profil</h3>
-    <div class="row" style="gap:14px;align-items:center;flex-wrap:nowrap">${S.data.profil.avatar ? `<img src="${S.data.profil.avatar}" alt="" style="height:64px;width:auto;flex:none">` : ''}
+    <div class="row" style="gap:14px;align-items:center;flex-wrap:nowrap">${S.data.profil.avatar ? `<img src="${esc(S.data.profil.avatar)}" alt="" style="height:64px;width:auto;flex:none">` : ''}
       <div class="field" style="margin:0;flex:1"><label for="f-pseudo">Pseudo</label><input class="input" id="f-pseudo" value="${esc(S.data.profil.pseudo || '')}" data-ch="pseudo" maxlength="32"></div></div>
     <div class="row" style="margin-top:10px"><label class="btn sm">${ic('upload')}${S.data.profil.avatar ? 'Changer l’avatar' : 'Choisir un avatar'}<input type="file" accept="image/*" hidden data-ch="avatar"></label>
       ${S.data.profil.avatar ? `<button class="btn sm ghost" data-act="avatar-del">${ic('x')}Retirer</button>` : ''}</div>
+    <h3 style="margin:20px 0 10px">Sauvegardes</h3>
+    <p class="muted" style="font-size:.9rem;margin-bottom:10px">${S.data.meta.derniereSauvegarde ? `Dernière sauvegarde locale : <b>${fmtDate(S.data.meta.derniereSauvegarde)}</b>.` : 'Aucune sauvegarde locale pour l’instant.'} Un rappel s’affiche si la dernière date de plus d’un mois.</p>
+    <div class="row" style="margin-bottom:6px"><button class="btn" data-act="backup">${ic('download')}Télécharger une sauvegarde</button><button class="btn" data-act="restore">${ic('upload')}Restaurer une sauvegarde</button><button class="btn" data-act="excel">${ic('download')}Export Excel</button></div>
     <h3 style="margin:20px 0 10px">Synchronisation GitHub</h3>
     ${syncOn() ? `<p class="muted" style="font-size:.9rem;margin-bottom:10px">Connecté à <b>${esc(syncCfg().repo)}</b> : chaque modification est envoyée automatiquement, et récupérée quand tu reviens sur la page depuis un autre appareil.</p>
-      <div class="row" style="margin-bottom:12px"><button class="btn" data-act="sync-now">${ic('save')}Synchroniser maintenant</button><button class="btn ghost" data-act="sync-off">${ic('x')}Déconnecter cet appareil</button></div>
+      ${syncCfg().expire ? `<p class="faint" style="font-size:.86rem;margin:-4px 0 10px">${ic('clock')} Jeton valable jusqu’au ${fmtDate(syncCfg().expire)}.</p>` : ''}
+      <div class="row" style="margin-bottom:12px"><button class="btn" data-act="sync-now">${ic('save')}Synchroniser maintenant</button><button class="btn" data-act="versions">${ic('history')}Historique des versions</button><button class="btn ghost" data-act="sync-off">${ic('x')}Déconnecter cet appareil</button></div>
       <details><summary class="muted" style="cursor:pointer;font-size:.88rem;margin-bottom:10px">Modifier la connexion</summary>${syncFormHTML(syncCfg())}</details>`
       : `<p class="muted" style="font-size:.9rem;margin-bottom:10px">Pour retrouver les mêmes données sur ton téléphone et ton ordinateur. Voir SYNCHRO.md.</p>${syncFormHTML()}`}
-    <h3 style="margin:20px 0 10px">Fichier de données</h3>
+    ${syncOn() ? '' : `<h3 style="margin:20px 0 10px">Fichier de données</h3>
     <p class="muted" style="font-size:.9rem;margin-bottom:10px">${syncOn() ? 'La synchronisation GitHub remplace le fichier lié. « Enregistrer » force un envoi, « Ouvrir un autre data.json » envoie ce fichier vers GitHub.' : S.linked && S.handle ? `Lié à <b>${esc(S.handle.name)}</b> : chaque modification est enregistrée automatiquement.` : 'Aucun fichier lié : « Enregistrer » télécharge un nouveau data.json à placer à côté de index.html.'}</p>
-    <div class="row"><button class="btn" data-act="save">${ic('save')}Enregistrer</button><button class="btn" data-act="pick">${ic('folder')}Ouvrir un autre data.json</button></div>
+    <div class="row"><button class="btn" data-act="save">${ic('save')}Enregistrer</button><button class="btn" data-act="pick">${ic('folder')}Ouvrir un autre data.json</button></div>`}
     <div class="acts"><button class="btn primary" data-act="close">Fermer</button></div>`);
 }
 
@@ -1968,6 +2164,10 @@ function cmdItems(q) {
   NAV.filter(n => has(n.label)).forEach(n => out.push({ icon: n.icon, label: n.label, hint: 'Aller à', run: () => go(n.id) }));
   [['JEUX', 'Ajouter un jeu'], ['BD', 'Ajouter une BD'], ['ROMAN', 'Ajouter un roman']].filter(([, l]) => has(l)).forEach(([c, l]) => out.push({ icon: 'plus', label: l, hint: 'Action', run: () => itemForm(c) }));
   if (has('Enregistrer')) out.push({ icon: 'save', label: 'Enregistrer', hint: 'Ctrl+S', run: save });
+  if (has('Ajout rapide ajouter')) out.push({ icon: 'plus', label: 'Ajout rapide', hint: 'Action', run: () => quickAdd() });
+  if (has('Télécharger une sauvegarde')) out.push({ icon: 'download', label: 'Télécharger une sauvegarde', hint: 'Action', run: backupDownload });
+  if (has('Export Excel')) out.push({ icon: 'download', label: 'Export Excel', hint: 'Action', run: excelDownload });
+  if (has('Noter des titres à noter')) out.push({ icon: 'star', label: 'Noter des titres', hint: 'Historique', run: () => FEAT_ACT['to-rate']() });
   if (has('Changer de thème clair sombre')) out.push({ icon: 'sun', label: 'Changer de thème', hint: 'Action', run: toggleTheme });
   if (q) {
     CAT_LIST.forEach(c => ranked(c).filter(x => matches(x.it.titre, q)).slice(0, 6).forEach(x => out.push({ icon: CATS[c].icon, label: x.it.titre, hint: `${CATS[c].court} · backlog`, run: () => itemSheet(c, x.it.id) })));
@@ -1996,6 +2196,326 @@ function moreSheet() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
+   I. NOTES, SAUVEGARDES, VERSIONS, AJOUT RAPIDE, EXPORT EXCEL
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ───────────── Notes sur 100 et avis (titres de l'historique) ───────────── */
+const noteOf = b => (b && b.note != null && b.note !== '' && !isNaN(+b.note)) ? +b.note : null;
+const noteCol = n => n >= 85 ? 'var(--ok)' : n >= 70 ? 'var(--c-jeux)' : n >= 50 ? 'var(--warn)' : 'var(--bad)';
+const noteBadge = (n, cls = '') => n == null ? '' : `<span class="nb ${cls}" style="--nc:${noteCol(n)}" title="Note : ${n} / 100">${n}</span>`;
+const libById = id => S.data.bibliotheque.find(b => b.id === id);
+/** Titres notés, du meilleur au moins bon. year = null pour tout l'historique ; cats = liste de catégories. */
+function rankedNotes(year = null, cats = CAT_LIST) {
+  const l = S.data.bibliotheque.filter(b => noteOf(b) != null && (year == null || b.annee === year) && cats.includes(b.categorie));
+  l.sort((a, b) => noteOf(b) - noteOf(a) || (b.termineLe || '').localeCompare(a.termineLe || '') || a.titre.localeCompare(b.titre, 'fr'));
+  let rang = 0, prev = null;                                   // ex æquo : même rang (1, 2, 2, 4…)
+  return l.map((b, i) => { if (noteOf(b) !== prev) { rang = i + 1; prev = noteOf(b); } return { b, rang, note: noteOf(b) }; });
+}
+const toRate = () => S.data.bibliotheque.filter(b => b.statut === 'termine' && noteOf(b) == null);
+const yearsWithNotes = () => [...new Set(S.data.bibliotheque.filter(b => noteOf(b) != null && b.annee).map(b => b.annee))].sort((a, b) => b - a);
+
+/** Champs « note » + « avis » réutilisés dans la fin d'un titre et dans la fiche de notation. */
+function noteFields(note, avis) {
+  const has = note != null;
+  return `<div class="field"><label for="f-note">Note sur 100 <span class="faint">(facultatif)</span></label>
+    <div class="notein ${has ? '' : 'unset'}"><input type="range" min="0" max="100" step="1" value="${has ? note : 70}" data-in="note-r" aria-label="Note (curseur)" tabindex="-1">
+      <input class="input num" id="f-note" name="note" type="number" min="0" max="100" step="1" inputmode="numeric" value="${has ? note : ''}" placeholder="—" data-in="note-n"></div></div>
+    <div class="field"><label for="f-avis">Avis <span class="faint">(facultatif)</span></label><textarea class="input" id="f-avis" name="avis" rows="3" maxlength="2000" placeholder="Ce que tu en as pensé, en quelques mots…">${esc(avis || '')}</textarea></div>`;
+}
+/** Lit note/avis d'un formulaire et les range dans l'entrée e (supprime si vide). */
+function applyNote(e, fd) {
+  const raw = String(fd.get('note') ?? '').trim(), avis = String(fd.get('avis') ?? '').trim();
+  if (raw === '' || isNaN(+raw)) delete e.note; else e.note = Math.max(0, Math.min(100, Math.round(+raw)));
+  if (avis) e.avis = avis; else delete e.avis;
+  if (e.note != null || e.avis) e.noteLe = isoDate(); else delete e.noteLe;
+}
+function rateForm(id) {
+  const b = libById(id); if (!b) return;
+  const meta = [CATS[b.categorie].label, b.support, b.termineLe ? 'terminé le ' + fmtDate(b.termineLe) : b.annee ? 'terminé en ' + b.annee : (b.statut === 'abandonne' ? 'abandonné' : 'archive sans date')].filter(Boolean).join(' · ');
+  modal(`<form data-form="rate" data-id="${id}"><h2>${esc(b.titre)}</h2><p class="muted" style="margin-bottom:18px">${esc(meta)}</p>
+    ${noteFields(noteOf(b), b.avis)}
+    <div class="acts">${noteOf(b) != null || b.avis ? `<button type="button" class="btn danger" data-act="rate-del" data-id="${id}">${ic('x')}Retirer</button>` : ''}<span class="spacer"></span><button type="button" class="btn" data-act="close">Annuler</button><button class="btn primary" type="submit">${ic('star')}Enregistrer</button></div></form>`, { cls: 'k-' + b.categorie });
+}
+FORMS.rate = (fd, f) => {
+  const b = libById(f.dataset.id); if (!b) return;
+  snap(); const before = noteOf(b); applyNote(b, fd); closeModal();
+  commit(noteOf(b) != null ? `« ${b.titre} » : ${noteOf(b)} / 100${before == null ? ` · encore ${toRate().length} titres à noter` : ''}` : 'Note retirée', true);
+};
+document.addEventListener('input', e => {
+  const t = e.target, k = t.dataset?.in; if (k !== 'note-r' && k !== 'note-n') return;
+  const box = t.closest('.notein'); if (!box) return;
+  const r = box.querySelector('[data-in=note-r]'), n = box.querySelector('[data-in=note-n]');
+  if (k === 'note-r') n.value = r.value; else if (n.value !== '') r.value = Math.max(0, Math.min(100, +n.value));
+  box.classList.toggle('unset', n.value === '');
+});
+
+/* ───────────── Sauvegarde locale & restauration sécurisée ───────────── */
+const BACKUP_DAYS = 30;
+const daysSince = iso => iso ? Math.floor((new Date(isoDate()) - new Date(iso)) / 864e5) : Infinity;
+function downloadText(text, name, type = 'application/json') {
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([text], { type })), download: name });
+  document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+/** Télécharge data.json daté et retient la date (dans data.json : le rappel est le même sur tous les appareils). */
+function backupDownload() {
+  S.data.meta.derniereSauvegarde = isoDate(); commit(null);
+  const name = `backlog-sauvegarde-${isoDate()}.json`; downloadText(ser(S.data) + '\n', name);
+  try { localStorage.removeItem('cockpit.backupSnooze'); } catch { /* */ }
+  paintNotices(); toast(`Sauvegarde téléchargée : ${name}. Range-la dans ton OneDrive.`);
+}
+/** Résumé chiffré d'un jeu de données (pour comparer avant de restaurer). */
+function dataStats(d) {
+  const bl = d.backlog || {}, lib = d.bibliotheque || [];
+  return { date: d.meta?.majLe || null, rev: d.meta?.rev ?? 0, jeux: (bl.jeux || []).length, bd: (bl.bd || []).length, romans: (bl.romans || []).length,
+    histo: lib.length, notes: lib.filter(b => noteOf(b) != null).length, achats: (d.achats || []).length, series: (d.series || []).length, abos: (d.abonnements || []).length };
+}
+let RESTORE = null;
+function restorePick() {
+  const inp = Object.assign(document.createElement('input'), { type: 'file', accept: '.json,application/json' });
+  inp.onchange = async () => { const f = inp.files[0]; if (!f) return; try { restoreCompare(parseData(await f.text()), `le fichier « ${f.name} »`); } catch (e) { toast('Ce fichier ne peut pas être restauré : ' + e.message); } };
+  inp.click();
+}
+function restoreCompare(d, source) {
+  const a = S.data ? dataStats(S.data) : { date: null, rev: 0, jeux: 0, bd: 0, romans: 0, histo: 0, notes: 0, achats: 0, series: 0, abos: 0 }, b = dataStats(d), total = x => x.jeux + x.bd + x.romans + x.histo;
+  if (total(b) === 0) { toast('Ce fichier est vide (aucun titre) : restauration refusée.'); return; }
+  const older = !!S.data && ((b.date && a.date && b.date < a.date) || b.rev < a.rev);
+  const big = !!S.data && (total(b) < total(a) * 0.8 || b.histo < a.histo - 20);
+  RESTORE = d;
+  const row = (l, k, fmt = v => fmtInt(v)) => { const dv = typeof a[k] === 'number' && k !== 'rev' ? b[k] - a[k] : 0;
+    return `<tr><td>${l}</td><td class="num">${a[k] == null ? '—' : fmt(a[k])}</td><td class="num"><b>${b[k] == null ? '—' : fmt(b[k])}</b>${dv ? ` <span class="${dv < 0 ? 'neg' : 'pos'}">${dv > 0 ? '+' : ''}${fmtInt(dv)}</span>` : ''}</td></tr>`; };
+  modal(`<h2>Restaurer une sauvegarde</h2><p class="muted" style="margin-bottom:14px">Compare avant de remplacer tes données par ${esc(source)}.</p>
+    ${older ? `<div class="warnbox">${ic('history')}<span>Cette sauvegarde est <b>plus ancienne</b> que tes données actuelles : les modifications faites depuis seront perdues.</span></div>` : ''}
+    ${big ? `<div class="warnbox bad">${ic('ban')}<span>Elle contient <b>nettement moins de titres</b> que tes données actuelles.</span></div>` : ''}
+    <table class="cmp"><thead><tr><th></th><th>Actuel</th><th>Sauvegarde</th></tr></thead><tbody>
+      ${row('Mis à jour le', 'date', fmtDate)}${row('Révision', 'rev')}${row('Jeux au backlog', 'jeux')}${row('BD au backlog', 'bd')}${row('Romans au backlog', 'romans')}
+      ${row('Historique', 'histo')}${row('Titres notés', 'notes')}${row('Achats', 'achats')}${row('Séries suivies', 'series')}${row('Abonnements', 'abos')}</tbody></table>
+    ${S.data ? `<label class="row" style="gap:10px;margin:16px 0 6px;cursor:pointer"><input type="checkbox" id="rs-keep" checked style="width:18px;height:18px"> Télécharger d’abord une copie de mes données actuelles</label>` : '<div style="height:12px"></div>'}
+    ${big || older ? `<label class="row" style="gap:10px;margin:6px 0;cursor:pointer"><input type="checkbox" id="rs-ok" style="width:18px;height:18px"> J’ai compris, je veux remplacer mes données</label>` : ''}
+    <div class="acts"><span class="spacer"></span><button class="btn" data-act="close">Annuler</button><button class="btn primary" data-act="restore-go" id="rs-go" ${big || older ? 'disabled' : ''}>${ic('upload')}Remplacer mes données</button></div>`);
+  $('#rs-ok')?.addEventListener('change', e => { $('#rs-go').disabled = !e.target.checked; });
+}
+function restoreGo() {
+  const d = RESTORE; if (!d) return;
+  if (!S.data) { RESTORE = null; closeModal(); start(d); S.dirty = true; paintSave(); if (syncOn()) pushNow(true); return; }   // depuis l'accueil
+  if ($('#rs-keep')?.checked) downloadText(ser(S.data) + '\n', `backlog-avant-restauration-${isoDate()}.json`);
+  snap(); const rev = Math.max(S.data.meta.rev || 0, d.meta.rev || 0);
+  S.data = d; S.data.meta.rev = rev; S._idx = null; RESTORE = null; closeModal();
+  commit('Sauvegarde restaurée' + (syncOn() ? ' et envoyée vers GitHub' : ''), true);
+}
+
+/* ───────────── Historique des versions (GitHub) ───────────── */
+const fmtDT = iso => { const d = new Date(iso); return `${d.getDate()} ${MOIS[d.getMonth()]} ${d.getFullYear()} · ${String(d.getHours()).padStart(2, '0')}h${String(d.getMinutes()).padStart(2, '0')}`; };
+async function versionsModal() {
+  modal(`<h2>Historique des versions</h2><p class="muted" style="margin-bottom:14px">Chaque enregistrement envoyé à GitHub est une version. Choisis-en une pour la comparer à l’actuelle, puis la restaurer si besoin.</p><div id="vers" class="vers"><div class="spin" style="margin:30px auto"></div></div>
+    <div class="acts"><span class="spacer"></span><button class="btn" data-act="close">Fermer</button></div>`, { wide: true });
+  try {
+    const l = await ghVersions(40), box = $('#vers'); if (!box) return;
+    box.innerHTML = l.length ? l.map((v, i) => `<div class="li"><div><b>${fmtDT(v.date)}</b><div class="faint" style="font-size:.82rem">${esc(v.msg.split('\n')[0])}${i === 0 ? ' · version actuelle' : ''}</div></div><span class="spacer"></span>${i === 0 ? '' : `<button class="btn sm" data-act="ver-open" data-sha="${v.sha}" data-date="${esc(v.date)}">${ic('history')}Voir</button>`}</div>`).join('')
+      : empty('history', 'Aucune version pour l’instant.');
+  } catch (e) { const box = $('#vers'); if (box) box.innerHTML = `<p class="muted">${esc(e.message)}${e.code === 'net' ? ' : réessaie quand tu auras du réseau.' : ''}</p>`; }
+}
+async function versionOpen(sha, date) {
+  try { toast('Chargement de la version…'); restoreCompare(parseData(await ghReadAt(sha)), `la version du ${fmtDT(date)}`); }
+  catch (e) { toast('Version illisible : ' + e.message); }
+}
+
+/* ───────────── Bandeaux d'alerte : jeton, sauvegarde ───────────── */
+function paintNotices() {
+  let box = $('#notices'); if (!box) { box = document.createElement('div'); box.id = 'notices'; $('#banner')?.after(box); }
+  if (!S.data) { box.innerHTML = ''; return; }
+  const out = [], c = syncCfg();
+  if (c?.expire) {
+    const left = -daysSince(c.expire);
+    if (left <= 30) out.push(`<div class="banner ${left <= 0 ? 'bad' : ''}">${ic('clock')}<span>${left <= 0 ? `Ton jeton GitHub a expiré le ${fmtDate(c.expire)} : la synchronisation est arrêtée.` : `Ton jeton GitHub expire le ${fmtDate(c.expire)} (dans ${plural(left, 'jour')}).`} Crée-en un nouveau et colle-le dans Réglages.</span><span class="spacer"></span><a class="btn sm" href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener">Ouvrir GitHub</a><button class="btn sm ghost" data-act="settings">Réglages</button></div>`);
+  }
+  let snooze = null; try { snooze = localStorage.getItem('cockpit.backupSnooze'); } catch { /* */ }
+  const last = S.data.meta.derniereSauvegarde, ago = daysSince(last);
+  if (ago > BACKUP_DAYS && !(snooze && daysSince(snooze) < 7))
+    out.push(`<div class="banner soft">${ic('download')}<span>${last ? `Dernière sauvegarde locale il y a ${plural(ago, 'jour')}.` : 'Aucune sauvegarde locale pour l’instant.'} Garde une copie de tes données dans ton OneDrive, au cas où.</span><span class="spacer"></span><button class="btn sm" data-act="backup">${ic('download')}Télécharger</button><button class="btn sm ghost" data-act="backup-later">Plus tard</button></div>`);
+  box.innerHTML = out.join('');
+}
+
+/* ───────────── Ajout rapide ───────────── */
+const QK = 'cockpit.quick';
+const quickPrefs = () => { try { return JSON.parse(localStorage.getItem(QK) || '{}'); } catch { return {}; } };
+/** « Boruto Tome 7 », « One Piece T108 », « Dune 2 » → { serie, tome } */
+function guessSerie(t) {
+  const m = t.match(/^(.+?)\s*[,\-–:]?\s*(?:tome|vol\.?|volume|t\.?)\s*(\d{1,4})\b/i) || t.match(/^(.+?)\s+(\d{1,4})$/);
+  return m ? { serie: m[1].trim(), tome: +m[2] } : null;
+}
+function quickAdd(cat, keepTitle = '') {
+  const p = quickPrefs(); cat ||= p.cat || 'JEUX';
+  const tab = (k, l) => `<button type="button" class="chip" data-act="quick-cat" data-v="${k}" aria-pressed="${k === cat}" style="--acc:${catVar(k)}">${l}</button>`;
+  modal(`<form data-form="quick" data-cat="${cat}"><h2>Ajout rapide</h2>
+    <div class="seg" style="margin:6px 0 16px">${tab('JEUX', 'Jeu')}${tab('BD', 'BD')}${tab('ROMAN', 'Roman')}</div>
+    ${fld('Titre', 'titre', keepTitle, { attrs: 'required autocomplete="off" data-in="quick-t"' })}
+    ${cat === 'JEUX' ? `<div class="two"><div class="field"><label for="f-plateforme">Plateforme</label><input class="input" id="f-plateforme" name="plateforme" list="dl-plat" value="${esc(p.plat || '')}" required autocapitalize="characters"><datalist id="dl-plat">${knownPlatforms().map(x => `<option value="${esc(x)}">`).join('')}</datalist></div>
+      ${sel('Priorité', 'priorite', [1, 2, 3].map(x => [x, prioLabel(x)]), p.prio || 2)}</div>
+      <details class="qdur"><summary class="muted">Durées HowLongToBeat (facultatif)</summary>
+        <div class="two" style="grid-template-columns:repeat(3,1fr);margin-top:10px">${fld('Main (h)', 'main', '', { type: 'number', attrs: 'step="0.5" min="0"' })}${fld('Main + (h)', 'mainPlus', '', { type: 'number', attrs: 'step="0.5" min="0"' })}${fld('100 % (h)', 'complet', '', { type: 'number', attrs: 'step="0.5" min="0"' })}</div>
+        ${hltbBlock(keepTitle)}</details>`
+      : `<p class="hint faint" id="q-serie" style="margin:-6px 0 14px;font-size:.82rem">${quickSerieHint(keepTitle)}</p>`}
+    <div class="acts"><span class="spacer"></span><button type="submit" class="btn" name="go" value="more">Ajouter et continuer</button><button class="btn primary" type="submit" name="go" value="close">${ic('plus')}Ajouter</button></div></form>`, { cls: 'k-' + cat });
+}
+const quickSerieHint = t => { const g = guessSerie(t || ''); return g ? `Série détectée : <b>${esc(g.serie)}</b> · tome ${g.tome}` : 'Astuce : « Boruto Tome 7 » range automatiquement le tome dans sa série.'; };
+document.addEventListener('input', e => { if (e.target.dataset?.in === 'quick-t') { const h = $('#q-serie'); if (h) h.innerHTML = quickSerieHint(e.target.value); } });
+FORMS.quick = (fd, f, ev) => {
+  const cat = f.dataset.cat, titre = String(fd.get('titre') || '').trim(); if (!titre) return;
+  const p = quickPrefs(); p.cat = cat; snap();
+  const it = { id: nextId({ JEUX: 'g', BD: 'b', ROMAN: 'r' }[cat], blk(cat)), titre, statut: 'non_commence', ajouteLe: isoDate() };
+  if (cat === 'JEUX') { it.plateforme = String(fd.get('plateforme') || '').trim().toUpperCase() || 'AUTRE'; it.priorite = +fd.get('priorite') || 2; it.hltb = { main: numOrNull(fd.get('main')), mainPlus: numOrNull(fd.get('mainPlus')), complet: numOrNull(fd.get('complet')) }; it.tempsJoue = 0; p.plat = it.plateforme; p.prio = it.priorite; }
+  else { const g = guessSerie(titre); it.serie = g?.serie || null; it.tome = g?.tome ?? null; it.priorite = null; }
+  blk(cat).push(it); try { localStorage.setItem(QK, JSON.stringify(p)); } catch { /* */ }
+  const more = ev.submitter?.value === 'more';
+  commit(`« ${titre} » ajouté au backlog${cat === 'JEUX' && it.hltb.main == null && it.hltb.mainPlus == null && it.hltb.complet == null ? ' : pense à ses durées HowLongToBeat' : ''}`, true);
+  if (more) { quickAdd(cat); } else closeModal();
+};
+
+/* ───────────── Export Excel (.xlsx natif, sans bibliothèque) ───────────── */
+const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+const crc32 = u => { let c = 0xFFFFFFFF; for (let i = 0; i < u.length; i++) c = CRC_T[(c ^ u[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+/** Archive ZIP sans compression (suffisant pour un .xlsx de quelques centaines de Ko). */
+function zipStore(files) {
+  const enc = new TextEncoder(), parts = [], central = []; let off = 0;
+  const u16 = v => [v & 255, (v >>> 8) & 255], u32 = v => [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255];
+  for (const [name, text] of files) {
+    const nb = enc.encode(name), data = enc.encode(text), crc = crc32(data);
+    const common = [...u16(20), ...u16(0x0800), ...u16(0), ...u16(0), ...u16(0x21), ...u32(crc), ...u32(data.length), ...u32(data.length), ...u16(nb.length), ...u16(0)];
+    const local = new Uint8Array([...u32(0x04034b50), ...common]);
+    parts.push(local, nb, data);
+    central.push(new Uint8Array([...u32(0x02014b50), ...u16(20), ...common, ...u16(0), ...u16(0), ...u16(0), ...u32(0), ...u32(off)]), nb);
+    off += local.length + nb.length + data.length;
+  }
+  const cSize = central.reduce((s, x) => s + x.length, 0);
+  const end = new Uint8Array([...u32(0x06054b50), ...u16(0), ...u16(0), ...u16(files.length), ...u16(files.length), ...u32(cSize), ...u32(off), ...u16(0)]);
+  return new Blob([...parts, ...central, end], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+}
+const xesc = v => String(v).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const colName = i => { let s = ''; i++; while (i) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; };
+function sheetXML(rows) {
+  const widths = rows[0].map((_, j) => Math.min(60, Math.max(8, ...rows.slice(0, 400).map(r => String(r[j] ?? '').length + 2))));
+  const cell = (v, r, c, head) => { const ref = colName(c) + (r + 1);
+    if (v == null || v === '') return '';
+    if (typeof v === 'number' && isFinite(v)) return `<c r="${ref}"${head ? ' s="1"' : ''}><v>${v}</v></c>`;
+    return `<c r="${ref}" t="inlineStr"${head ? ' s="1"' : ''}><is><t xml:space="preserve">${xesc(v)}</t></is></c>`; };
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">`
+    + `<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>`
+    + `<cols>${widths.map((w, j) => `<col min="${j + 1}" max="${j + 1}" width="${w}" customWidth="1"/>`).join('')}</cols><sheetData>`
+    + rows.map((r, i) => `<row r="${i + 1}">${r.map((v, j) => cell(v, i, j, i === 0)).join('')}</row>`).join('')
+    + `</sheetData>${rows.length > 1 ? `<autoFilter ref="A1:${colName(rows[0].length - 1)}${rows.length}"/>` : ''}</worksheet>`;
+}
+function xlsxBlob(sheets) {
+  const ns = 'http://schemas.openxmlformats.org/', files = [
+    ['[Content_Types].xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="${ns}package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${sheets.map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`],
+    ['_rels/.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="${ns}package/2006/relationships"><Relationship Id="rId1" Type="${ns}officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`],
+    ['xl/workbook.xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="${ns}spreadsheetml/2006/main" xmlns:r="${ns}officeDocument/2006/relationships"><sheets>${sheets.map((s, i) => `<sheet name="${xesc(s.name)}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join('')}</sheets></workbook>`],
+    ['xl/_rels/workbook.xml.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="${ns}package/2006/relationships">${sheets.map((_, i) => `<Relationship Id="rId${i + 1}" Type="${ns}officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join('')}<Relationship Id="rId${sheets.length + 1}" Type="${ns}officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`],
+    ['xl/styles.xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="${ns}spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf/></cellStyleXfs><cellXfs count="2"><xf fontId="0"/><xf fontId="1" applyFont="1"/></cellXfs></styleSheet>`],
+    ...sheets.map((s, i) => [`xl/worksheets/sheet${i + 1}.xml`, sheetXML(s.rows)]),
+  ];
+  return zipStore(files);
+}
+function excelSheets() {
+  const d = S.data, st = s => STATUTS[s] || s || '', pr = p => p ? prioLabel(p) : '';
+  const scores = c => new Map(ranked(c).map(x => [x.it.id, Math.round(x.score)]));
+  const sj = scores('JEUX'), sb = scores('BD'), sr = scores('ROMAN');
+  const shelf = (arr, sc) => [['Titre', 'Série', 'Tome', 'Priorité', 'Statut', 'Backlog Score', 'Ajouté le'], ...arr.map(x => [x.titre, x.serie, x.tome, pr(x.priorite), st(x.statut), sc.get(x.id), x.ajouteLe])];
+  const ranks = rankedNotes();
+  return [
+    { name: 'Jeux', rows: [['Titre', 'Plateforme', 'Priorité', 'Statut', 'Main (h)', 'Main + (h)', '100 % (h)', 'Temps joué (h)', 'Backlog Score', 'Ajouté le'],
+      ...d.backlog.jeux.map(g => [g.titre, g.plateforme, pr(g.priorite), st(g.statut), g.hltb?.main, g.hltb?.mainPlus, g.hltb?.complet, g.tempsJoue, sj.get(g.id), g.ajouteLe])] },
+    { name: 'BD', rows: shelf(d.backlog.bd, sb) },
+    { name: 'Romans', rows: shelf(d.backlog.romans, sr) },
+    { name: 'Historique', rows: [['Titre', 'Catégorie', 'Support', 'Statut', 'Année', 'Terminé le', 'Note /100', 'Avis'],
+      ...[...d.bibliotheque].sort((a, b) => (b.termineLe || String(b.annee || '')).localeCompare(a.termineLe || String(a.annee || ''))).map(b => [b.titre, CATS[b.categorie]?.label, b.support, st(b.statut), b.annee, b.termineLe, noteOf(b), b.avis])] },
+    { name: 'Classement', rows: [['Rang', 'Titre', 'Catégorie', 'Année', 'Note /100', 'Avis'], ...ranks.map(r => [r.rang, r.b.titre, CATS[r.b.categorie]?.label, r.b.annee, r.note, r.b.avis])] },
+    { name: 'Séries', rows: [['Série', 'Type', 'Dernier tome acheté', 'Statut', 'Tomes à lire', 'Mise à jour'], ...d.series.map(s => [s.nom, s.type, s.tomeAchete, st(s.statut), serieInfo(s).wait.length, s.majLe])] },
+    { name: 'Achats', rows: [['Titre', 'Plateforme', 'Date', 'État', 'Remarque', 'Priorité', 'Rare'], ...d.achats.map(a => [a.titre, a.plateforme, a.date || a.dateTexte, a.etat === 'commande' ? 'Commandé' : 'À commander', a.remarque, pr(a.priorite), a.rare ? 'oui' : ''])] },
+    { name: 'Abonnements', rows: [['Service', 'Statut', 'Prix (€)', 'Périodicité', 'Échéance', 'Renouvelable'], ...d.abonnements.map(a => [a.service, a.statut === 'abonne' ? 'Abonné' : 'Résilié', a.prix, a.periodicite, a.echeance, a.renouvelable ? 'oui' : 'non'])] },
+    { name: 'Objectifs', rows: [['Année', 'Objectif jeux', 'Jeux terminés', 'Objectif BD', 'BD lues', 'Objectif romans', 'Romans lus'],
+      ...Object.keys(d.objectifs).sort().reverse().map(y => [+y, goalOf(+y, 'JEUX'), doneYear(+y, 'JEUX'), goalOf(+y, 'BD'), doneYear(+y, 'BD'), goalOf(+y, 'ROMAN'), doneYear(+y, 'ROMAN')])] },
+  ];
+}
+function excelDownload() {
+  try { const b = xlsxBlob(excelSheets()), a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(b), download: `backlog-${isoDate()}.xlsx` });
+    document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); toast('Fichier Excel téléchargé : ' + a.download); }
+  catch (e) { console.error(e); toast('L’export Excel a échoué : ' + e.message); }
+}
+
+const FEAT_ACT = {
+  rate: d => rateForm(d.id),
+  'rate-del': d => { const b = libById(d.id); if (!b) return; snap(); delete b.note; delete b.avis; delete b.noteLe; closeModal(); commit('Note retirée', true); },
+  'histo-f': d => { S.histo.f = d.v; render(); },
+  'tops-cat': d => { S.tops.cat = d.v; render(); },
+  'tops-all': () => { S.tops.all = true; render(); },
+  'to-rate': () => { S.histo.f = 'anoter'; S.histo.q = ''; go('historique'); },
+  backup: backupDownload,
+  'backup-later': () => { try { localStorage.setItem('cockpit.backupSnooze', isoDate()); } catch { /* */ } paintNotices(); },
+  restore: () => { closeModal(); restorePick(); },
+  'restore-go': restoreGo,
+  versions: versionsModal,
+  'ver-open': d => versionOpen(d.sha, d.date),
+  excel: excelDownload,
+  quick: () => quickAdd(),
+  'quick-cat': d => { const t = $('#modal-root [name=titre]')?.value || ''; quickAdd(d.v, t); },
+  'ex-bilan': () => {
+    const y = NOW.getMonth() === 0 ? YEAR - 1 : YEAR;
+    Object.assign(EXP, { annee: y === YEAR ? 'cur' : String(y), titre: `Mon bilan ${y}`, sousTitre: '', format: 'auto' });
+    Object.assign(EXP.s, { kpis: true, bilan: true, objectifs: true, mois: true, top: true, termines: false, prochain: false, backlog: false, series: false, achats: false, abos: false });
+    EXP.kpis.total = true; EXP.top.cle = 'auto'; EXP.top.max = 10; expSave(); render(); toast(`Bilan ${y} prêt : ajuste les sections puis télécharge l’image.`);
+  },
+};
+
+/* ───────────── HowLongToBeat : recherche + collage intelligent ─────────────
+   HowLongToBeat n'a pas d'accès public : on ouvre sa recherche dans un onglet,
+   tu copies le bloc des durées, et l'appli reconnaît Main / Main + / 100 %. */
+const hltbUrl = t => 'https://howlongtobeat.com/?q=' + encodeURIComponent((t || '').trim());
+/** « 25½ Hours », « 25.5 Hours », « 45 Mins », « 25h 30m », « 1h », « 40 min » → heures (arrondi à la demi-heure). */
+function hltbDur(s) {
+  s = s.replace(/½/g, '.5').replace(/,/g, '.');
+  let m = s.match(/^\s*(\d+(?:\.\d+)?)\s*h(?:ours?|rs?)?\.?\s*(?:(\d+)\s*m(?:in(?:ute)?s?)?)?/i);
+  if (m) return Math.round((+m[1] + (m[2] ? +m[2] / 60 : 0)) * 2) / 2;
+  m = s.match(/^\s*(\d+(?:\.\d+)?)\s*(?:m|mins?|minutes?)\b/i);
+  if (m) return Math.max(0.5, Math.round(+m[1] / 60 * 2) / 2);
+  return null;
+}
+/** Reconnaît les durées dans un texte copié depuis HowLongToBeat (fiche du jeu ou résultat de recherche). */
+function parseHltb(text) {
+  const t = String(text || '').replace(/ /g, ' ').replace(/[ \t]+/g, ' ');
+  const labels = [['main', /main\s*story/i], ['mainPlus', /main\s*\+\s*(?:sides?|extras?)/i], ['complet', /completionist/i]];
+  const out = { main: null, mainPlus: null, complet: null };
+  const DUR = /(\d+(?:[.,]\d+)?½?\s*(?:hours?|hrs?|h|mins?|minutes?|m)\b(?:\s*\d+\s*m(?:ins?)?\b)?)/i;
+  for (const [k, re] of labels) {
+    const m = re.exec(t); if (!m) continue;
+    const after = t.slice(m.index + m[0].length, m.index + m[0].length + 80).split(/main\s*story|main\s*\+|completionist|all\s*(?:play)?styles|co-?op|vs\.?|single-player/i)[0];
+    const d = after.match(DUR); if (d) out[k] = hltbDur(d[1]);
+  }
+  return out.main == null && out.mainPlus == null && out.complet == null ? null : out;
+}
+/** Bloc à insérer dans un formulaire de jeu : lien de recherche + champ « coller ». */
+function hltbBlock(titre) {
+  return `<div class="hltbbox"><div class="row" style="gap:8px;flex-wrap:wrap"><a class="btn sm" id="hltb-link" href="${hltbUrl(titre)}" target="_blank" rel="noopener">${ic('search')}Chercher sur HowLongToBeat</a>
+      ${navigator.clipboard?.readText ? `<button type="button" class="btn sm" data-act="hltb-clip">${ic('download')}Coller les durées</button>` : ''}</div>
+    <textarea class="input" data-in="hltb-paste" rows="2" placeholder="…ou colle ici le bloc copié sur HowLongToBeat (Main Story, Main + Sides, Completionist)" aria-label="Coller les durées HowLongToBeat"></textarea>
+    <p class="hint faint" id="hltb-msg">Sur la fiche du jeu, sélectionne le bloc des durées, copie-le, puis reviens ici.</p></div>`;
+}
+function hltbApply(text) {
+  const r = parseHltb(text), msg = $('#hltb-msg'), f = $('#modal-root form'); if (!f) return;
+  if (!r) { if (msg) msg.innerHTML = text.trim() ? '<span style="color:var(--warn)">Aucune durée reconnue : copie le bloc « Main Story… Completionist ».</span>' : 'Sur la fiche du jeu, sélectionne le bloc des durées, copie-le, puis reviens ici.'; return; }
+  for (const k of ['main', 'mainPlus', 'complet']) { const i = f.querySelector(`[name=${k}]`); if (i && r[k] != null) { i.value = r[k]; i.classList.add('flash'); setTimeout(() => i.classList.remove('flash'), 900); } }
+  if (msg) msg.innerHTML = `<span style="color:var(--ok);display:inline-flex;gap:6px;align-items:center">${ic('check')}Rempli : ${[['Main', r.main], ['Main +', r.mainPlus], ['100 %', r.complet]].map(([l, v]) => `${l} ${v != null ? fmtH(v) : '—'}`).join(' · ')}</span>`;
+}
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset?.in === 'hltb-paste') hltbApply(t.value);
+  if (t.name === 'titre' && t.form && $('#hltb-link', t.form)) $('#hltb-link', t.form).href = hltbUrl(t.value);
+});
+FEAT_ACT['hltb-clip'] = async () => {
+  try { const txt = await navigator.clipboard.readText(); const ta = $('#modal-root [data-in=hltb-paste]'); if (ta) ta.value = txt; hltbApply(txt); }
+  catch { toast('Le navigateur refuse la lecture du presse-papiers : colle le texte dans le champ (appui long > Coller).'); }
+};
+
+/* ═══════════════════════════════════════════════════════════════════════
    G. ACTIONS, ÉVÉNEMENTS & DÉMARRAGE
    Les boutons portent data-act="nom" ; ACT[nom] est appelée par la délégation.
    ═══════════════════════════════════════════════════════════════════════ */
@@ -2005,8 +2525,11 @@ function toast(msg, undo) {
   t.querySelector('button')?.addEventListener('click', () => { undo(); t.remove(); });
   setTimeout(() => t.remove(), undo ? 7000 : 4000);
 }
+/** Les données viennent d'être remplacées depuis l'extérieur (GitHub, restauration) : les « Annuler » en attente n'ont plus de sens. */
+function resetUndo() { S.snapshot = null; $$('#toasts .toast button').forEach(b => b.remove()); }
 /** Restaure l'instantané pris par snap() avant la dernière modification. */
 function undoLast() {
+  if (!S.snapshot) return toast('Rien à annuler : les données ont été mises à jour depuis un autre appareil.');
   S.data = JSON.parse(S.snapshot); S.data.meta.rev += 2; S._idx = null; S.dirty = true; paintSave(); writeDraft(); autosave(); render();
 }
 
@@ -2033,15 +2556,15 @@ const ACT = {
   'achat-recu': d => {
     snap(); const i = S.data.achats.findIndex(x => x.id === d.id), [a] = S.data.achats.splice(i, 1);
     S.data.backlog.jeux.push({ id: nextId('g', S.data.backlog.jeux), titre: a.titre, plateforme: a.plateforme, priorite: a.priorite, statut: 'non_commence', hltb: { main: null, mainPlus: null, complet: null }, tempsJoue: 0, ajouteLe: isoDate() });
-    commit(`« ${a.titre} » ajouté au backlog : renseigne ses durées HowLongToBeat`, true);
+    commit(`« ${a.titre} » ajouté au backlog`, true); itemForm('JEUX', S.data.backlog.jeux[S.data.backlog.jeux.length - 1].id);
   },
   'achat-edit': d => achatForm(d.id),
   'achat-del': d => { snap(); S.data.achats = S.data.achats.filter(x => x.id !== d.id); closeModal(); commit('Achat supprimé', true); },
   'abo-edit': d => aboForm(d.i != null ? +d.i : null),
   'abo-del': d => { snap(); S.data.abonnements.splice(+d.i, 1); closeModal(); commit('Abonnement supprimé', true); },
-  'tops-tab': d => { S.tops.tab = d.v; render(); },
+  'tops-tab': d => { S.tops.tab = d.v; S.tops.all = false; render(); },
   'top-edit': d => topForm(d.v),
-  'top-del': d => { snap(); delete S.data.tops[d.v]; S.tops.tab = 'toutesEpoques'; closeModal(); commit('Classement supprimé', true); },
+  'top-del': d => { snap(); delete S.data.tops[d.v]; S.tops.tab = 'general'; closeModal(); commit('Liste supprimée', true); },
   'serie-edit': d => serieForm(d.i != null ? +d.i : null),
   'serie-del': d => { snap(); S.data.series.splice(+d.i, 1); closeModal(); commit('Série supprimée', true); },
   'serie-plus': d => {
@@ -2064,7 +2587,7 @@ const ACT = {
   save, pick: pickFile, cmd: () => { closeModal(); cmdOpen(); }, 'cmd-run': d => cmdRun(+d.i),
   theme: () => { closeModal(); toggleTheme(); }, settings: () => { closeModal(); settingsModal(); },
 };
-Object.assign(ACT, EXP_ACT);
+Object.assign(ACT, EXP_ACT, FEAT_ACT);
 document.addEventListener('click', e => {
   const el = e.target.closest('[data-act]'); if (!el) return;
   if (el.dataset.act === 'mclose-bg' && e.target !== el) return;
@@ -2119,7 +2642,7 @@ document.addEventListener('scroll', () => tipEl.classList.remove('on'), { passiv
 /* — Connexion GitHub (réglages et écran d'accueil) — */
 FORMS.sync = async (fd, f) => {
   const msg = $('#sy-msg', f), btn = f.querySelector('button[type=submit]'); const say = t => { if (msg) msg.textContent = t; };
-  const cfg = { repo: String(fd.get('repo')).trim().replace(/^https?:\/\/github\.com\//, '').replace(/\.git$|\/$/g, ''), token: String(fd.get('token')).trim(), path: String(fd.get('path') || 'data.json').trim() || 'data.json', branch: String(fd.get('branch') || 'main').trim() || 'main' };
+  const cfg = { repo: String(fd.get('repo')).trim().replace(/^https?:\/\/github\.com\//, '').replace(/\.git$|\/$/g, ''), token: String(fd.get('token')).trim(), path: String(fd.get('path') || 'data.json').trim() || 'data.json', branch: String(fd.get('branch') || 'main').trim() || 'main', expire: String(fd.get('expire') || '') || null };
   btn.disabled = true; say('Vérification…');
   const err = await syncTest(cfg); if (err) { say(err); btn.disabled = false; return; }
   localStorage.setItem('cockpit.sync', JSON.stringify(cfg)); SY.sha = null; SY.state = 'wait';
@@ -2148,6 +2671,7 @@ function toggleTheme() { localStorage.setItem('cockpit.theme', document.document
 $('#btn-theme').onclick = toggleTheme;
 $('#btn-cmd').onclick = cmdOpen;
 $('#btn-settings').onclick = settingsModal;
+$('#app').insertAdjacentHTML('beforeend', `<button class="fab" id="fab" data-act="quick" title="Ajout rapide" aria-label="Ajout rapide">${ic('plus')}</button>`);
 $('#savepill').onclick = save;
 $('#file-input').onchange = e => { const f = e.target.files[0]; if (f) openPicked(f, null); e.target.value = ''; };
 
@@ -2157,12 +2681,14 @@ function showWelcome() {
   boot.innerHTML = `<div class="glass box"><svg class="mark" style="margin:auto;width:56px;height:56px" aria-hidden="true"><use href="#logo"/></svg><h1>Backlog</h1>
     <p>Pour afficher tes données, choisis le fichier <code>data.json</code>. Le navigateur s’en souvient : tu ne le fais qu’une fois.</p>
     <div class="row" style="justify-content:center;margin:20px 0 14px"><button class="btn primary" id="w-pick">${ic('folder')}Ouvrir data.json</button>${S.handle ? `<button class="btn" id="w-resume">${ic('history')}Reprendre avec ${esc(S.handle.name)}</button>` : ''}</div>
+    ${S.loadError ? `<div class="warnbox bad" style="text-align:left">${ic('ban')}<span>Les données n’ont pas pu être chargées. ${esc(S.loadError)}</span></div>
+      ${syncOn() ? `<div class="row" style="justify-content:center;margin-bottom:14px"><button class="btn" data-act="versions">${ic('history')}Revenir à une version précédente</button></div>` : ''}` : ''}
     <details style="text-align:left;margin-bottom:14px" ${syncOn() ? 'open' : ''}><summary class="muted" style="cursor:pointer;text-align:center;font-size:.9rem">Synchroniser avec GitHub (téléphone et ordinateur)</summary><div style="margin-top:12px">${syncFormHTML(syncCfg() || {})}</div></details>
     <p class="faint" style="font-size:.84rem">Ouverte par double-clic, la page ne peut pas lire <code>data.json</code> toute seule : c’est une règle des navigateurs, pas un bug. Autre option : lance <code>python3 -m http.server</code> dans ce dossier, puis ouvre <code>localhost:8000</code>.</p></div>`;
   $('#w-pick').onclick = pickFile; $('#w-resume')?.addEventListener('click', resumeLinked);
 }
 function start(d) {
-  S.data = d; S._idx = null; S.dirty = false;
+  S.data = d; S._idx = null; S.dirty = false; resetUndo();
   $('#boot').hidden = true; $('#boot').innerHTML = ''; $('#app').hidden = false;
   const h = location.hash.slice(1); if (VIEWS[h]) S.view = h;
   $('#banner').innerHTML = '';
@@ -2174,7 +2700,7 @@ function start(d) {
       $('#dr-no').onclick = () => { localStorage.removeItem('cockpit.draft'); $('#banner').innerHTML = ''; };
     }
   } catch { /* brouillon illisible : ignoré */ }
-  paintSave(); render();
+  paintSave(); render(); paintNotices();
 }
 (async function boot() {
   applyTheme();
