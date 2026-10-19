@@ -231,7 +231,14 @@ h3{font-size:.95rem;font-weight:620}
 .gcard h3{font-size:1.05rem;line-height:1.25;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .metas{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px}
 .hltb{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:11px}
-.hltb div{background:var(--glass);border:1px solid var(--line);border-radius:9px;padding:5px 8px;font-size:.7rem;color:var(--tx3);line-height:1.25}
+.hltb div,.hltb .hc{background:var(--glass);border:1px solid var(--line);border-radius:9px;padding:5px 8px;font-size:.7rem;color:var(--tx3);line-height:1.25;text-align:left;font-family:inherit}
+.hltb .hc{cursor:pointer;transition:border-color .15s,background .15s}
+.hltb .hc:not(:disabled):hover{border-color:var(--line-2);background:var(--glass-2)}
+.hltb .hc:disabled{cursor:default;opacity:.7}
+.hltb .hc:focus-visible{outline:2px solid var(--acc,var(--c-jeux));outline-offset:2px}
+.hltb .tgt{color:var(--acc,var(--c-jeux));font-size:.6rem;vertical-align:1px}
+.obj-line{font-size:.86rem;margin:2px 0 4px;line-height:1.5}
+.linkbtn{background:none;border:0;padding:0;color:var(--acc,var(--c-jeux));font:inherit;text-decoration:underline;cursor:pointer}
 .hltb b{display:block;font-size:.88rem;color:var(--tx);font-weight:620}
 .hltb .ref{border-color:color-mix(in srgb,var(--acc) 55%,transparent);background:color-mix(in srgb,var(--acc) 14%,transparent)}
 .prog{display:flex;justify-content:space-between;font-size:.78rem;color:var(--tx2);margin-bottom:5px}
@@ -385,6 +392,38 @@ table.cmp .neg{color:var(--bad);font-size:.8rem;font-weight:650} table.cmp .pos{
 .hltbbox .hint{font-size:.8rem;margin:0}
 .input.flash{border-color:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
 details.qdur{margin:-2px 0 14px} details.qdur summary{cursor:pointer;font-size:.88rem}
+/* — affichage en liste — */
+.vue-sw .chip{padding:6px 10px} .vue-sw .ic{width:15px;height:15px}
+.dtable-wrap{border-radius:20px;overflow-x:auto;padding:4px 6px}
+.dtable{width:100%;border-collapse:collapse;font-size:.88rem}
+.dtable th{font-size:.74rem;font-weight:600;color:var(--tx3);text-align:left;padding:12px 8px 10px;white-space:nowrap;border-bottom:1px solid var(--line-2)}
+.dtable th.num,.dtable td.num{text-align:right}
+.dtable td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.dtable tbody tr:last-child td{border-bottom:0}
+.dtable tbody tr:hover td{background:color-mix(in srgb,var(--glass-2) 70%,transparent)}
+.dtable tr.is-next td:first-child{box-shadow:inset 3px 0 0 var(--acc)}
+.thb{all:unset;cursor:pointer;color:inherit;font:inherit} .thb.on{color:var(--tx)} .thb:hover{color:var(--tx2)} .thb:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
+.tlink{all:unset;cursor:pointer;font-weight:600;color:var(--tx);line-height:1.3} .tlink:hover{text-decoration:underline} .tlink:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
+.dtable .sub{display:none;font-size:.76rem;color:var(--tx3);margin-top:2px}
+.dtable .c-n{width:2.4em;color:var(--tx3)} .dtable .c-t{min-width:170px} .dtable .c-act{width:1%;white-space:nowrap}
+.dtable td.c-h{padding:6px 2px;width:58px} .dtable th.c-h{text-align:center}
+.hltb.mini{display:block;margin:0} .hltb.mini .hc{width:100%;padding:4px 5px;text-align:center;white-space:nowrap} .hltb.mini .hc b{font-size:.8rem;display:inline}
+.dtable .nw,.dtable td.num{white-space:nowrap} .mini-pill{font-size:.66rem;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.pbar{min-width:130px} .dtable .pill{white-space:nowrap}
+.pbar{display:flex;align-items:center;gap:8px;min-width:110px} .pbar .bar{flex:1;margin:0} .pbar span{font-size:.78rem;color:var(--tx2);min-width:3em;text-align:right}
+.sc{white-space:nowrap} .sc b{font-weight:700;min-width:1.8em;display:inline-block}
+.scb{display:inline-block;width:30px;height:6px;border-radius:9px;background:var(--line);margin-right:8px;vertical-align:middle;overflow:hidden} .scb i{display:block;height:100%;width:var(--w);background:var(--col);border-radius:9px}
+.pill.nx{font-size:.68rem;padding:2px 7px;color:var(--acc);border-color:color-mix(in srgb,var(--acc) 40%,transparent)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:1380px){ .dtable .opt2{display:none} }
+@media (max-width:1180px){ .dtable .opt-l{display:none} }
+@media (max-width:980px){ .dtable .opt{display:none} .dtable .sub{display:block} }
+.dtable .sub.always{display:block} .pdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pc);margin-right:6px;vertical-align:1px}
+@media (max-width:760px){
+  .dtable .opt,.dtable .opt2{display:none} .dtable .sub{display:block} .dtable .c-t{min-width:0}
+  .dtable{font-size:.86rem} .dtable td{padding:10px 6px} .dtable-wrap{padding:2px 4px} .scb{display:none}
+  .vue-sw span{display:none}
+}
 /* ═══════════════ 5. RESPONSIVE ═══════════════ */
 @media (max-width:1180px){
   .app{grid-template-columns:72px minmax(0,1fr)}
@@ -534,7 +573,7 @@ const fmtInt = n => Math.round(n).toLocaleString('fr-FR');
 const fmtH = h => h == null ? '—' : (h >= 100 ? fmtInt(h) : String(Math.round(h * 10) / 10).replace('.', ',')) + ' h';
 const fmtPct = p => Math.round(p * 100) + ' %';
 const hash = s => { let h = 5381; for (const c of String(s)) h = ((h << 5) + h + c.charCodeAt(0)) | 0; return Math.abs(h); };
-const plural = (n, s, p) => `${fmtInt(n)} ${n > 1 ? (p || s + 's') : s}`;
+const plural = (n, s, p) => `${fmtInt(n)} ${n > 1 ? (p || (/(eu|au)$/.test(s) ? s + 'x' : s + 's')) : s}`;   // jeu → jeux
 const isoDate = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const fmtDate = iso => { if (!iso) return '—'; const [y, m, d] = iso.split('-').map(Number); return `${d} ${MOIS[m - 1]} ${y}`; };
 const NOW = new Date();
@@ -561,10 +600,11 @@ function sdial(score, cat, size = 46) {
    Sauvegarde : écriture directe si un fichier est lié, sinon téléchargement. */
 const S = {
   data: null, view: 'accueil', handle: null, dirty: false, linked: false, snapshot: null, _idx: null,
-  f: { JEUX: { q: '', plat: new Set(), prio: new Set(), statut: 'tous', sort: 'score' },
-       BD: { q: '', statut: 'tous', sort: 'serie' }, ROMAN: { q: '', statut: 'tous', sort: 'serie' } },
+  f: { JEUX: { q: '', plat: new Set(), prio: new Set(), statut: 'tous', sort: 'score', vue: 'cartes' },
+       BD: { q: '', statut: 'tous', sort: 'serie', vue: 'cartes' }, ROMAN: { q: '', statut: 'tous', sort: 'serie', vue: 'cartes' } },
   stats: { cat: 'ALL' }, histo: { q: '', f: 'tous' }, tops: { tab: null, cat: 'ALL', all: false }, achats: { etat: 'tous' }, series: { q: '', statut: 'tous' }, abos: { statut: 'tous' },
 };
+try { const v = JSON.parse(localStorage.getItem('cockpit.vues') || '{}'); for (const k in S.f) if (v[k] === 'liste' || v[k] === 'cartes') S.f[k].vue = v[k]; } catch { /* préférences d'affichage absentes */ }
 
 /* — mémoire du fichier lié (IndexedDB) — */
 const idb = {
@@ -601,7 +641,7 @@ function parseData(text) {
   const bad = [];
   for (const [k, pre] of [['jeux', 'g'], ['bd', 'b'], ['romans', 'r']]) d.backlog[k] = d.backlog[k].filter(isObj).map(it => {
     fixId(it, pre); str(it, 'titre', 'Sans titre'); it.statut = oneOf(it.statut, ['non_commence', 'en_cours'], 'non_commence'); it.priorite = num(it.priorite);
-    if (k === 'jeux') { str(it, 'plateforme', 'AUTRE'); const h = isObj(it.hltb) ? it.hltb : {}; it.hltb = { main: num(h.main), mainPlus: num(h.mainPlus), complet: num(h.complet) }; it.tempsJoue = num(it.tempsJoue) || 0; }
+    if (k === 'jeux') { if (it.objectif != null && !['main', 'mainPlus', 'complet'].includes(it.objectif)) delete it.objectif; str(it, 'plateforme', 'AUTRE'); const h = isObj(it.hltb) ? it.hltb : {}; it.hltb = { main: num(h.main), mainPlus: num(h.mainPlus), complet: num(h.complet) }; it.tempsJoue = num(it.tempsJoue) || 0; }
     else { str(it, 'serie', null); it.tome = num(it.tome); }
     return it; });
   d.bibliotheque = d.bibliotheque.filter(isObj).map(b => {
@@ -883,10 +923,14 @@ const DEFAULT_AVATAR = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKQAAAEECA
    ═══════════════════════════════════════════════════════════════════════ */
 const blk = cat => S.data.backlog[CATS[cat].blk];
 
-/** Temps HLTB de référence d'un jeu (réglage « referenceHltb », avec repli sur les autres valeurs). */
+/** Temps HLTB de référence d'un jeu : son objectif propre (« objectif »), sinon le réglage général, avec repli sur les autres valeurs. */
+const HLTB_KEYS = ['main', 'mainPlus', 'complet'];
+const HLTB_LAB = { main: 'Main', mainPlus: 'Main +', complet: '100 %' };
+const HLTB_LONG = { main: 'Main Story', mainPlus: 'Main + Side', complet: '100 %' };
+const objOf = g => HLTB_KEYS.includes(g.objectif) ? g.objectif : S.data.config.referenceHltb;
 function refKey(g) {
   const h = g.hltb || {};
-  for (const k of [S.data.config.referenceHltb, 'mainPlus', 'main', 'complet']) if (h[k] != null) return k;
+  for (const k of [objOf(g), 'mainPlus', 'main', 'complet']) if (h[k] != null) return k;
   return null;
 }
 const refH = g => { const k = refKey(g); return k ? g.hltb[k] : null; };
@@ -1194,15 +1238,22 @@ VIEWS.accueil = function () {
       <div style="flex:1;min-width:190px">${hbars(plats.slice(0, 7).map(([p, o]) => ({ label: p, value: o.n, color: platColor(p), tip: `${p} : ${o.n} jeux, ${fmtH(o.h)} restantes`, text: `${o.n}` })))}</div></div></div>
     <div class="glass pad"><h2 style="margin-bottom:16px">Jeux par priorité</h2>
       ${hbars(prios.map(x => ({ label: prioLabel(x.p), value: x.n, color: prioCol[x.p], text: `${x.n} · ${fmtH(x.h)}`, tip: `${prioLabel(x.p)} : ${x.n} jeux, ${fmtH(x.h)} restantes` })))}
-      <p class="faint" style="font-size:.82rem;margin-top:12px">Temps restant = temps de référence (${{ main: 'Main Story', mainPlus: 'Main + Side', complet: '100 %' }[d.config.referenceHltb]}) moins le temps déjà joué.</p></div>
+      <p class="faint" style="font-size:.82rem;margin-top:12px">Temps restant = objectif de chaque jeu (Main, Main + ou 100 %, sinon ${HLTB_LONG[d.config.referenceHltb]} par défaut) moins le temps déjà joué.</p></div>
   </section>
   <section class="glass pad" style="margin-top:16px"><div class="row" style="margin-bottom:10px"><h2>Terminés en ${YEAR}, mois par mois</h2><span class="spacer"></span>${legend(CAT_LIST.map(c => ({ label: CATS[c].court, color: catVar(c) })))}</div>${monthsChart(YEAR, 1000)}</section>`;
 };
 
 /* ───────────── Backlog jeux ───────────── */
+/** Case Main / Main + / 100 % : un clic en fait l'objectif de ce jeu (re-clic sur l'objectif choisi = retour au réglage par défaut). */
+function hltbCell(g, k, l, keyRef = refKey(g)) {
+  const v = g.hltb?.[k], on = k === keyRef && v != null, own = g.objectif === k;
+  const tip = v == null ? `${HLTB_LONG[k]} : durée inconnue` : own ? `Objectif choisi pour ce jeu. Clique pour revenir au réglage par défaut (${HLTB_LONG[S.data.config.referenceHltb]})` : `Viser ${HLTB_LONG[k]} pour ce jeu`;
+  return `<button type="button" class="hc ${on ? 'ref' : ''} ${own ? 'own' : ''}" data-act="set-obj" data-id="${g.id}" data-k="${k}" ${v == null ? 'disabled' : ''} title="${esc(tip)}" aria-pressed="${on}">${l}${own ? ' <span class="tgt">●</span>' : ''}<b class="num">${fmtH(v)}</b></button>`;
+}
+
 function gameCard(x, rankMode) {
   const g = x.it, r = refH(g), p = pctGame(g), keyRef = refKey(g);
-  const cell = (k, l) => `<div class="${k === keyRef && r != null ? 'ref' : ''}">${l}<b class="num">${fmtH(g.hltb?.[k])}</b></div>`;
+  const cell = (k, l) => hltbCell(g, k, l, keyRef);
   return `<article class="gcard glass k-JEUX" style="--pc:${platColor(g.plateforme)}">
     <div class="gtop"><div style="min-width:0"><h3>${esc(g.titre)}</h3>
       <div class="metas"><span class="pill dot" style="--pc:${platColor(g.plateforme)}">${esc(g.plateforme || '—')}</span>${prioPill(g.priorite)}${statPill(g.statut)}</div></div>${sdial(x.score, 'JEUX', 48)}</div>
@@ -1230,7 +1281,8 @@ function filterJeux() {
 }
 function listJeux() {
   const l = filterJeux(), rk = new Map(ranked('JEUX').map((x, i) => [x.it.id, i + 1]));
-  return l.length ? l.map(x => gameCard(x, rk.get(x.it.id))).join('') : empty('search', 'Aucun jeu ne correspond à ces filtres.');
+  if (!l.length) return empty('search', 'Aucun jeu ne correspond à ces filtres.');
+  return S.f.JEUX.vue === 'liste' ? tableJeux(l, rk) : `<section class="cards">${l.map(x => gameCard(x, rk.get(x.it.id))).join('')}</section>`;
 }
 VIEWS.jeux = function () {
   const f = S.f.JEUX, ov = overview().jeux;
@@ -1242,9 +1294,43 @@ VIEWS.jeux = function () {
     ${[['tous', 'Tous'], ['en_cours', 'En cours'], ['non_commence', 'Non commencés'], ...(blk('JEUX').some(g => !hasHltb(g)) || f.statut === 'sans_duree' ? [['sans_duree', `Sans durée · ${blk('JEUX').filter(g => !hasHltb(g)).length}`]] : [])].map(([v, l]) => chip('set-statut', `data-cat="JEUX" data-v="${v}"`, f.statut === v, l)).join('')}</div>
   <div class="toolbar">${[1, 2, 3].map(p => chip('tog', `data-cat="JEUX" data-k="prio" data-v="${p}"`, f.prio.has(p), `${ic('flame')}${esc(prioLabel(p))}`)).join('')}<span class="faint">|</span>
     ${plats.map(([p, n]) => chip('tog', `data-cat="JEUX" data-k="plat" data-v="${esc(p)}"`, f.plat.has(p), `${esc(p)} <span class="faint num">${n}</span>`)).join('')}
-    ${f.q || f.plat.size || f.prio.size || f.statut !== 'tous' ? `<button class="btn ghost sm" data-act="reset" data-cat="JEUX">Réinitialiser</button>` : ''}</div>
-  <p class="faint" id="count" style="margin:4px 2px 14px">${plural(filterJeux().length, 'résultat')}</p><section class="cards" id="list">${listJeux()}</section>`;
+    ${f.q || f.plat.size || f.prio.size || f.statut !== 'tous' ? `<button class="btn ghost sm" data-act="reset" data-cat="JEUX">Réinitialiser</button>` : ''}<span class="spacer"></span>${vueSwitch('JEUX')}</div>
+  <p class="faint" id="count" style="margin:4px 2px 14px">${plural(filterJeux().length, 'résultat')}</p><div id="list">${listJeux()}</div>`;
 };
+
+/* ───────────── Affichage en liste (tableau) ───────────── */
+const vueSwitch = cat => `<div class="seg vue-sw" role="group" aria-label="Affichage">${[['cartes', 'Cartes', 'layers'], ['liste', 'Liste', 'history']].map(([v, l, i]) => `<button class="chip" data-act="set-vue" data-cat="${cat}" data-v="${v}" aria-pressed="${S.f[cat].vue === v}" title="Affichage en ${l.toLowerCase()}">${v === 'liste' ? '<svg class="ic" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>' : '<svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>'}<span>${l}</span></button>`).join('')}</div>`;
+/** En-tête triable : un clic trie la liste sur cette colonne (mêmes tris que le menu). */
+const th = (cat, label, key, cls = '') => key ? `<th class="${cls}"><button class="thb ${S.f[cat].sort === key ? 'on' : ''}" data-act="sort-col" data-cat="${cat}" data-v="${key}">${label}${S.f[cat].sort === key ? ' ▾' : ''}</button></th>` : `<th class="${cls}">${label}</th>`;
+const scoreCell = (x, cat) => `<td class="num sc"><span class="scb" style="--w:${Math.round(x.score)}%;--col:${catVar(cat)}"><i></i></span><b>${Math.round(x.score)}</b></td>`;
+function tableJeux(l, rk) {
+  return `<div class="dtable-wrap glass"><table class="dtable k-JEUX"><thead><tr>${th('JEUX', 'n°', '', 'c-n')}${th('JEUX', 'Titre', 'titre')}${th('JEUX', 'Priorité', 'priorite', 'opt')}
+    <th class="opt c-h" colspan="3">Main · Main + · 100 %</th>${th('JEUX', 'Avancement', 'progression', 'opt2')}${th('JEUX', 'Reste', 'restant', 'num')}${th('JEUX', 'Score', 'score', 'num')}<th class="c-act"><span class="sr">Actions</span></th></tr></thead><tbody>
+    ${l.map(x => { const g = x.it, p = pctGame(g), kr = refKey(g);
+      return `<tr><td class="num faint c-n">${rk.get(g.id)}</td>
+        <td class="c-t"><button class="tlink" data-act="open" data-cat="JEUX" data-id="${g.id}">${esc(g.titre)}</button>${g.statut === 'en_cours' ? ' <span class="pill s-en_cours mini-pill">En cours</span>' : ''}<span class="sub always"><i class="pdot" style="--pc:${platColor(g.plateforme)}"></i>${esc(g.plateforme || '—')}</span></td>
+        <td class="opt">${g.priorite ? `<span class="pill p${g.priorite}">${ic('flame')}${esc(prioLabel(g.priorite))}</span>` : ''}</td>
+        ${HLTB_KEYS.map(k => `<td class="opt c-h"><span class="hltb mini">${hltbCell(g, k, '', kr)}</span></td>`).join('')}
+        <td class="opt2"><div class="pbar"><div class="bar"><i style="--w:${p * 100}%;--col:var(--c-jeux)"></i></div><span class="num">${fmtH(g.tempsJoue || 0)} · ${refH(g) != null ? fmtPct(p) : '—'}</span></div></td>
+        <td class="num">${x.rest != null ? fmtH(x.rest) : '—'}</td>${scoreCell(x, 'JEUX')}
+        <td class="c-act"><div class="row" style="gap:4px;flex-wrap:nowrap;justify-content:flex-end"><button class="btn sm primary icon" data-act="finish" data-cat="JEUX" data-id="${g.id}" title="Terminer" aria-label="Terminer">${ic('check')}</button><button class="btn sm opt-l" data-act="addh" data-id="${g.id}" title="Ajouter 1 h de jeu">+1 h</button><button class="btn sm icon ghost" data-act="edit" data-cat="JEUX" data-id="${g.id}" title="Modifier" aria-label="Modifier">${ic('edit')}</button></div></td></tr>`; }).join('')}
+  </tbody></table></div>`;
+}
+function tableShelf(cat, l) {
+  const f = S.f[cat], rk = new Map(ranked(cat).map((x, i) => [x.it.id, i + 1]));
+  const sorts = { score: (a, b) => b.score - a.score, titre: (a, b) => a.it.titre.localeCompare(b.it.titre, 'fr'),
+    serie: (a, b) => (a.it.serie ? 0 : 1) - (b.it.serie ? 0 : 1) || (a.it.serie || '').localeCompare(b.it.serie || '', 'fr') || (a.it.tome ?? 1e9) - (b.it.tome ?? 1e9) || a.it.titre.localeCompare(b.it.titre, 'fr') };
+  l = [...l].sort(sorts[f.sort] || sorts.serie);
+  return `<div class="dtable-wrap glass"><table class="dtable k-${cat}"><thead><tr>${th(cat, 'n°', '', 'c-n')}${th(cat, 'Titre', 'titre')}${th(cat, 'Série', 'serie', 'opt')}<th class="num opt">Tome</th><th class="opt2">Priorité</th><th class="opt2">Statut</th><th class="opt2">Ajouté le</th>${th(cat, 'Score', 'score', 'num')}<th class="c-act"><span class="sr">Actions</span></th></tr></thead><tbody>
+    ${l.map(x => { const b = x.it, next = x.eligible && b.serie;
+      return `<tr class="${next ? 'is-next' : ''}"><td class="num faint c-n">${rk.get(b.id)}</td>
+        <td class="c-t"><button class="tlink" data-act="open" data-cat="${cat}" data-id="${b.id}">${esc(b.titre)}</button><span class="sub">${b.serie ? esc(b.serie) + (b.tome != null ? ' · tome ' + b.tome : '') : (cat === 'BD' ? 'One-shot' : 'Roman isolé')}${next ? ' · prochain' : ''}</span></td>
+        <td class="opt">${b.serie ? esc(b.serie) : '<span class="faint">—</span>'}${next ? ' <span class="pill nx">prochain</span>' : ''}</td><td class="num opt">${b.tome ?? '—'}</td>
+        <td class="opt2">${b.priorite ? `<span class="pill p${b.priorite}">${ic('flame')}${esc(prioLabel(b.priorite))}</span>` : '<span class="faint">—</span>'}</td>
+        <td class="opt2">${statPill(b.statut) || '<span class="faint">—</span>'}</td><td class="opt2 faint nw">${b.ajouteLe ? fmtDate(b.ajouteLe) : '—'}</td>${scoreCell(x, cat)}
+        <td class="c-act"><div class="row" style="gap:4px;flex-wrap:nowrap;justify-content:flex-end"><button class="btn sm primary icon" data-act="finish" data-cat="${cat}" data-id="${b.id}" title="Terminer" aria-label="Terminer">${ic('check')}</button><button class="btn sm icon ghost" data-act="edit" data-cat="${cat}" data-id="${b.id}" title="Modifier" aria-label="Modifier">${ic('edit')}</button></div></td></tr>`; }).join('')}
+  </tbody></table></div>`;
+}
 
 /* ───────────── Bibliothèque BD / romans ───────────── */
 /** Titre sans le nom de la série quand il le répète (« Boruto Tome 6 » → « Tome 6 »). */
@@ -1264,6 +1350,7 @@ function listShelf(cat) {
   if (f.q) l = l.filter(x => matches(x.it.titre, f.q));
   if (f.statut !== 'tous') l = l.filter(x => x.it.statut === f.statut);
   if (!l.length) return empty('search', 'Rien ne correspond à cette recherche.');
+  if (f.vue === 'liste') return tableShelf(cat, l);
   if (f.sort === 'score') return `<div class="shelf">${l.sort((a, b) => b.score - a.score).map(x => volume(x, cat, true)).join('')}</div>`;
   if (f.sort === 'titre') return `<div class="shelf">${l.sort((a, b) => a.it.titre.localeCompare(b.it.titre, 'fr')).map(x => volume(x, cat, true)).join('')}</div>`;
   const groups = new Map();
@@ -1283,7 +1370,7 @@ function vShelf(cat) {
   return `${head(c.label, `${plural(blk(cat).length, c.unit, cat === 'BD' ? 'BD' : undefined)} en attente · ${fmtInt(cat === 'BD' ? ov.lues : ov.lus)} ${cat === 'BD' ? 'lues' : 'lus'} depuis le début`, `<button class="btn primary" data-act="add" data-cat="${cat}">${ic('plus')}Ajouter ${cat === 'BD' ? 'une BD' : 'un roman'}</button>`)}
   <div class="toolbar"><label class="search">${ic('search')}<input class="input" data-in="q" data-cat="${cat}" placeholder="Rechercher…" value="${esc(f.q)}" aria-label="Rechercher"></label>
     <select class="select" data-ch="sort" data-cat="${cat}" style="width:auto" aria-label="Organiser">${[['serie', 'Par série'], ['score', 'Backlog Score'], ['titre', 'Titre (A→Z)']].map(([v, l]) => `<option value="${v}" ${f.sort === v ? 'selected' : ''}>${l}</option>`).join('')}</select>
-    ${chip('tous', 'Tous')}${chip('en_cours', 'En cours')}${chip('non_commence', 'Non commencés')}</div>
+    ${chip('tous', 'Tous')}${chip('en_cours', 'En cours')}${chip('non_commence', 'Non commencés')}<span class="spacer"></span>${vueSwitch(cat)}</div>
   <div id="list">${listShelf(cat)}</div>`;
 }
 VIEWS.bd = () => vShelf('BD');
@@ -1963,7 +2050,10 @@ const FORMS = {};
 /* — Fiche d'un titre du backlog — */
 function itemSheet(cat, id) {
   const x = scoreMap(cat).get(id); if (!x) return; const it = x.it;
-  const hltb = cat === 'JEUX' ? `<div class="hltb" style="margin-top:12px">${[['main', 'Main'], ['mainPlus', 'Main +'], ['complet', '100 %']].map(([k, l]) => `<div>${l}<b class="num">${fmtH(it.hltb?.[k])}</b></div>`).join('')}</div>
+  const kr = cat === 'JEUX' ? refKey(it) : null, want = cat === 'JEUX' ? objOf(it) : null;
+  const objTxt = cat !== 'JEUX' ? '' : kr == null ? 'Aucune durée renseignée.' : `Objectif : <b>${HLTB_LONG[kr]}</b> ${it.objectif ? '(choisi pour ce jeu)' : '(réglage par défaut)'}${kr !== want ? ` · ${HLTB_LONG[want]} inconnu, ${HLTB_LONG[kr]} utilisé` : ''}`;
+  const hltb = cat === 'JEUX' ? `<div class="hltb" style="margin-top:12px">${HLTB_KEYS.map(k => hltbCell(it, k, HLTB_LAB[k], kr)).join('')}</div>
+    <p class="faint obj-line">${objTxt}${it.objectif ? ` <button class="linkbtn" data-act="set-obj" data-id="${it.id}" data-k="">Revenir au réglage par défaut</button>` : ''}<br><span style="font-size:.78rem">Touche Main, Main + ou 100 % pour choisir le temps visé.</span></p>
     ${refH(it) != null ? `<div class="prog"><span class="num">${fmtH(it.tempsJoue || 0)} joué sur ${fmtH(refH(it))}</span><b class="num">${fmtPct(pctGame(it))}</b></div><div class="bar"><i style="--w:${pctGame(it) * 100}%;--col:var(--acc)"></i></div>` : ''}` : '';
   modal(`<div style="min-width:0"><h2>${esc(it.titre)}</h2><div class="metas" style="margin-top:8px">${itemMetas(x)}</div>${hltb}</div>
     <h3 style="margin:20px 0 2px">Backlog Score : <span class="num" style="color:var(--acc)">${Math.round(x.score)}</span> / 100</h3>${whyRows(x.parts)}
@@ -1983,6 +2073,7 @@ function itemForm(cat, id) {
        <div class="two"><div class="field"><label for="f-plateforme">Plateforme</label><input class="input" id="f-plateforme" name="plateforme" list="dl-plat" value="${esc(it.plateforme || '')}" required><datalist id="dl-plat">${knownPlatforms().map(p => `<option value="${esc(p)}">`).join('')}</datalist></div>${prio}</div>
        <div class="two" style="grid-template-columns:repeat(3,1fr)">${fld('Main (h)', 'main', it.hltb?.main, { type: 'number', attrs: 'step="0.5" min="0"' })}${fld('Main + (h)', 'mainPlus', it.hltb?.mainPlus, { type: 'number', attrs: 'step="0.5" min="0"' })}${fld('100 % (h)', 'complet', it.hltb?.complet, { type: 'number', attrs: 'step="0.5" min="0"' })}</div>
        ${hltbBlock(it.titre)}
+       ${sel('Temps visé pour ce jeu', 'objectif', [['', `Par défaut (${HLTB_LONG[S.data.config.referenceHltb]})`], ...HLTB_KEYS.map(k => [k, HLTB_LONG[k]])], it.objectif || '')}
        <div class="two">${fld('Temps joué (h)', 'tempsJoue', it.tempsJoue || 0, { type: 'number', attrs: 'step="0.5" min="0"' })}${stat}</div>`
     : `${fld('Titre', 'titre', it.titre, { attrs: 'required' })}
        <div class="two">${fld('Série', 'serie', it.serie, { hint: 'Optionnel : regroupe les tomes' })}${fld('Tome', 'tome', it.tome, { type: 'number', attrs: 'min="0" step="1"' })}</div>
@@ -1996,7 +2087,7 @@ FORMS.item = (fd, f) => {
   const it = id ? findItem(cat, id) : { id: nextId({ JEUX: 'g', BD: 'b', ROMAN: 'r' }[cat], blk(cat)), ajouteLe: isoDate() };
   it.titre = titre; it.statut = fd.get('statut');
   it.priorite = fd.get('priorite') === '' ? null : +fd.get('priorite');
-  if (cat === 'JEUX') { it.plateforme = fd.get('plateforme').trim().toUpperCase(); it.hltb = { main: numOrNull(fd.get('main')), mainPlus: numOrNull(fd.get('mainPlus')), complet: numOrNull(fd.get('complet')) }; it.tempsJoue = numOrNull(fd.get('tempsJoue')) || 0; if (it.tempsJoue > 0 && it.statut === 'non_commence') it.statut = 'en_cours'; }
+  if (cat === 'JEUX') { it.plateforme = fd.get('plateforme').trim().toUpperCase(); it.hltb = { main: numOrNull(fd.get('main')), mainPlus: numOrNull(fd.get('mainPlus')), complet: numOrNull(fd.get('complet')) }; it.tempsJoue = numOrNull(fd.get('tempsJoue')) || 0; const ob = fd.get('objectif'); if (HLTB_KEYS.includes(ob)) it.objectif = ob; else delete it.objectif; if (it.tempsJoue > 0 && it.statut === 'non_commence') it.statut = 'en_cours'; }
   else { it.serie = fd.get('serie').trim() || null; it.tome = numOrNull(fd.get('tome')); }
   if (!id) blk(cat).push(it);
   closeModal(); commit(id ? 'Modifications enregistrées' : `« ${titre} » ajouté au backlog`, true);
@@ -2136,7 +2227,7 @@ function settingsModal() {
   modal(`<h2>Réglages</h2><p class="muted" style="margin-bottom:18px">Tout est enregistré dans data.json.</p>
     <h3 style="margin-bottom:10px">Backlog Score</h3>
     ${sl('priorite', 'Priorité')}${sl('progression', 'Progression')}${sl('tempsRestant', 'Temps restant (les titres courts passent devant)')}${sl('anciennete', 'Ancienneté au backlog')}
-    <div class="field" style="margin-top:14px"><label for="f-ref">Temps HowLongToBeat de référence</label><select class="select" id="f-ref" data-ch="ref">${[['main', 'Main Story'], ['mainPlus', 'Main + Side (recommandé)'], ['complet', 'Complétion 100 %']].map(([v, l]) => `<option value="${v}" ${c.referenceHltb === v ? 'selected' : ''}>${l}</option>`).join('')}</select><span class="hint">Sert au pourcentage d’avancement, au temps restant et au score.</span></div>
+    <div class="field" style="margin-top:14px"><label for="f-ref">Temps HowLongToBeat visé par défaut</label><select class="select" id="f-ref" data-ch="ref">${[['main', 'Main Story'], ['mainPlus', 'Main + Side (recommandé)'], ['complet', 'Complétion 100 %']].map(([v, l]) => `<option value="${v}" ${c.referenceHltb === v ? 'selected' : ''}>${l}</option>`).join('')}</select><span class="hint">Sert au pourcentage d’avancement, au temps restant et au score. Chaque jeu peut avoir son propre objectif : touche Main, Main + ou 100 % sur sa carte ou sa fiche.</span></div>
     <h3 style="margin:20px 0 10px">Profil</h3>
     <div class="row" style="gap:14px;align-items:center;flex-wrap:nowrap">${S.data.profil.avatar ? `<img src="${esc(S.data.profil.avatar)}" alt="" style="height:64px;width:auto;flex:none">` : ''}
       <div class="field" style="margin:0;flex:1"><label for="f-pseudo">Pseudo</label><input class="input" id="f-pseudo" value="${esc(S.data.profil.pseudo || '')}" data-ch="pseudo" maxlength="32"></div></div>
@@ -2353,7 +2444,8 @@ function quickAdd(cat, keepTitle = '') {
       ${sel('Priorité', 'priorite', [1, 2, 3].map(x => [x, prioLabel(x)]), p.prio || 2)}</div>
       <details class="qdur"><summary class="muted">Durées HowLongToBeat (facultatif)</summary>
         <div class="two" style="grid-template-columns:repeat(3,1fr);margin-top:10px">${fld('Main (h)', 'main', '', { type: 'number', attrs: 'step="0.5" min="0"' })}${fld('Main + (h)', 'mainPlus', '', { type: 'number', attrs: 'step="0.5" min="0"' })}${fld('100 % (h)', 'complet', '', { type: 'number', attrs: 'step="0.5" min="0"' })}</div>
-        ${hltbBlock(keepTitle)}</details>`
+        ${hltbBlock(keepTitle)}
+        ${sel('Temps visé', 'objectif', [['', `Par défaut (${HLTB_LONG[S.data.config.referenceHltb]})`], ...HLTB_KEYS.map(k => [k, HLTB_LONG[k]])], '')}</details>`
       : `<p class="hint faint" id="q-serie" style="margin:-6px 0 14px;font-size:.82rem">${quickSerieHint(keepTitle)}</p>`}
     <div class="acts"><span class="spacer"></span><button type="submit" class="btn" name="go" value="more">Ajouter et continuer</button><button class="btn primary" type="submit" name="go" value="close">${ic('plus')}Ajouter</button></div></form>`, { cls: 'k-' + cat });
 }
@@ -2363,7 +2455,7 @@ FORMS.quick = (fd, f, ev) => {
   const cat = f.dataset.cat, titre = String(fd.get('titre') || '').trim(); if (!titre) return;
   const p = quickPrefs(); p.cat = cat; snap();
   const it = { id: nextId({ JEUX: 'g', BD: 'b', ROMAN: 'r' }[cat], blk(cat)), titre, statut: 'non_commence', ajouteLe: isoDate() };
-  if (cat === 'JEUX') { it.plateforme = String(fd.get('plateforme') || '').trim().toUpperCase() || 'AUTRE'; it.priorite = +fd.get('priorite') || 2; it.hltb = { main: numOrNull(fd.get('main')), mainPlus: numOrNull(fd.get('mainPlus')), complet: numOrNull(fd.get('complet')) }; it.tempsJoue = 0; p.plat = it.plateforme; p.prio = it.priorite; }
+  if (cat === 'JEUX') { it.plateforme = String(fd.get('plateforme') || '').trim().toUpperCase() || 'AUTRE'; it.priorite = +fd.get('priorite') || 2; it.hltb = { main: numOrNull(fd.get('main')), mainPlus: numOrNull(fd.get('mainPlus')), complet: numOrNull(fd.get('complet')) }; it.tempsJoue = 0; if (HLTB_KEYS.includes(fd.get('objectif'))) it.objectif = fd.get('objectif'); p.plat = it.plateforme; p.prio = it.priorite; }
   else { const g = guessSerie(titre); it.serie = g?.serie || null; it.tome = g?.tome ?? null; it.priorite = null; }
   blk(cat).push(it); try { localStorage.setItem(QK, JSON.stringify(p)); } catch { /* */ }
   const more = ev.submitter?.value === 'more';
@@ -2422,8 +2514,8 @@ function excelSheets() {
   const shelf = (arr, sc) => [['Titre', 'Série', 'Tome', 'Priorité', 'Statut', 'Backlog Score', 'Ajouté le'], ...arr.map(x => [x.titre, x.serie, x.tome, pr(x.priorite), st(x.statut), sc.get(x.id), x.ajouteLe])];
   const ranks = rankedNotes();
   return [
-    { name: 'Jeux', rows: [['Titre', 'Plateforme', 'Priorité', 'Statut', 'Main (h)', 'Main + (h)', '100 % (h)', 'Temps joué (h)', 'Backlog Score', 'Ajouté le'],
-      ...d.backlog.jeux.map(g => [g.titre, g.plateforme, pr(g.priorite), st(g.statut), g.hltb?.main, g.hltb?.mainPlus, g.hltb?.complet, g.tempsJoue, sj.get(g.id), g.ajouteLe])] },
+    { name: 'Jeux', rows: [['Titre', 'Plateforme', 'Priorité', 'Statut', 'Main (h)', 'Main + (h)', '100 % (h)', 'Temps visé', 'Temps joué (h)', 'Backlog Score', 'Ajouté le'],
+      ...d.backlog.jeux.map(g => [g.titre, g.plateforme, pr(g.priorite), st(g.statut), g.hltb?.main, g.hltb?.mainPlus, g.hltb?.complet, refKey(g) ? HLTB_LONG[refKey(g)] : '', g.tempsJoue, sj.get(g.id), g.ajouteLe])] },
     { name: 'BD', rows: shelf(d.backlog.bd, sb) },
     { name: 'Romans', rows: shelf(d.backlog.romans, sr) },
     { name: 'Historique', rows: [['Titre', 'Catégorie', 'Support', 'Statut', 'Année', 'Terminé le', 'Note /100', 'Avis'],
@@ -2443,6 +2535,13 @@ function excelDownload() {
 }
 
 const FEAT_ACT = {
+  'set-obj': d => {
+    const g = findItem('JEUX', d.id); if (!g) return; snap();
+    const k = HLTB_KEYS.includes(d.k) && g.objectif !== d.k ? d.k : null;
+    if (k) g.objectif = k; else delete g.objectif;
+    const open = !!$('#modal-root .hltb'); commit(`« ${g.titre} » : objectif ${HLTB_LONG[refKey(g)] || '—'}${k ? '' : ' (par défaut)'}`, true);
+    if (open) itemSheet('JEUX', g.id);
+  },
   rate: d => rateForm(d.id),
   'rate-del': d => { const b = libById(d.id); if (!b) return; snap(); delete b.note; delete b.avis; delete b.noteLe; closeModal(); commit('Note retirée', true); },
   'histo-f': d => { S.histo.f = d.v; render(); },
@@ -2540,8 +2639,10 @@ const ACT = {
   close: closeModal,
   'mclose-bg': () => closeModal(),
   'set-statut': d => { S.f[d.cat].statut = d.v; render(); },
+  'set-vue': d => { S.f[d.cat].vue = d.v; try { const v = JSON.parse(localStorage.getItem('cockpit.vues') || '{}'); v[d.cat] = d.v; localStorage.setItem('cockpit.vues', JSON.stringify(v)); } catch { /* */ } render(); },
+  'sort-col': d => { S.f[d.cat].sort = d.v; render(); },
   tog: d => { const s = S.f[d.cat][d.k], v = d.k === 'prio' ? +d.v : d.v; s.has(v) ? s.delete(v) : s.add(v); render(); },
-  reset: d => { S.f[d.cat] = { q: '', plat: new Set(), prio: new Set(), statut: 'tous', sort: S.f[d.cat].sort }; render(); },
+  reset: d => { S.f[d.cat] = { q: '', plat: new Set(), prio: new Set(), statut: 'tous', sort: S.f[d.cat].sort, vue: S.f[d.cat].vue }; render(); },
   open: d => itemSheet(d.cat, d.id),
   add: d => itemForm(d.cat),
   edit: d => itemForm(d.cat, d.id),
