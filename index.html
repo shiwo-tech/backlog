@@ -410,7 +410,7 @@ details.qdur{margin:-2px 0 14px} details.qdur summary{cursor:pointer;font-size:.
 .dtable .sub{display:none;font-size:.76rem;color:var(--tx3);margin-top:2px}
 .dtable .c-n{width:2.4em;color:var(--tx3)} .dtable .c-t{min-width:170px} .dtable .c-act{width:1%;white-space:nowrap}
 .dtable td.c-h{padding:6px 2px;width:58px} .dtable th.c-h{text-align:center}
-.hltb.mini{display:block;margin:0} .hltb.mini .hc{width:100%;padding:4px 5px;text-align:center;white-space:nowrap} .hltb.mini .hc b{font-size:.8rem;display:inline}
+.hltb.hmini{display:block;margin:0;padding:0;border:0;background:none} .hltb.hmini .hc{width:100%;padding:4px 5px;text-align:center;white-space:nowrap} .hltb.hmini .hc b{font-size:.8rem;display:inline}
 .dtable .nw,.dtable td.num{white-space:nowrap} .mini-pill{font-size:.66rem;padding:1px 7px;margin-left:6px;vertical-align:1px}
 .pbar{min-width:130px} .dtable .pill{white-space:nowrap}
 .pbar{display:flex;align-items:center;gap:8px;min-width:110px} .pbar .bar{flex:1;margin:0} .pbar span{font-size:.78rem;color:var(--tx2);min-width:3em;text-align:right}
@@ -427,6 +427,15 @@ details.qdur{margin:-2px 0 14px} details.qdur summary{cursor:pointer;font-size:.
   .dtable{font-size:.86rem} .dtable td{padding:10px 6px} .dtable-wrap{padding:2px 4px} .scb{display:none}
   .vue-sw span{display:none}
 }
+/* — accueil « en cours » — */
+.pick .dial.idle{width:148px;height:148px;border-radius:50%;display:grid;place-items:center;border:2px dashed var(--line-2);color:var(--tx3)}
+.pick .dial.idle .ic{width:48px;height:48px}
+.pick .v small{font-size:.5em;margin-left:2px;opacity:.7}
+.prog-line{margin:4px 0 14px;color:var(--tx2);font-size:.92rem} .prog-line b{color:var(--tx)}
+.also{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:14px;font-size:.84rem}
+.mdot{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;border:2px dashed var(--line-2);color:var(--tx3)}
+.mdot.on{border:0;background:color-mix(in srgb,var(--acc) 18%,transparent);color:var(--acc)} .mdot .ic{width:24px;height:24px}
+.mini-empty h3{color:var(--tx2)}
 /* ═══════════════ 5. RESPONSIVE ═══════════════ */
 @media (max-width:1180px){
   .app{grid-template-columns:72px minmax(0,1fr)}
@@ -643,7 +652,8 @@ function parseData(text) {
   const oneOf = (v, list, def) => list.includes(v) ? v : def;
   const bad = [];
   for (const [k, pre] of [['jeux', 'g'], ['bd', 'b'], ['romans', 'r']]) d.backlog[k] = d.backlog[k].filter(isObj).map(it => {
-    fixId(it, pre); str(it, 'titre', 'Sans titre'); it.statut = oneOf(it.statut, ['non_commence', 'en_cours'], 'non_commence'); it.priorite = num(it.priorite);
+    fixId(it, pre); str(it, 'titre', 'Sans titre');
+    for (const k of ['joueLe', 'commenceLe']) if (it[k] != null && !(typeof it[k] === 'string' && /^\d{4}-\d{2}-\d{2}/.test(it[k]))) delete it[k]; it.statut = oneOf(it.statut, ['non_commence', 'en_cours'], 'non_commence'); it.priorite = num(it.priorite);
     if (k === 'jeux') { if (it.objectif != null && !['main', 'mainPlus', 'complet'].includes(it.objectif)) delete it.objectif; str(it, 'plateforme', 'AUTRE'); const h = isObj(it.hltb) ? it.hltb : {}; it.hltb = { main: num(h.main), mainPlus: num(h.mainPlus), complet: num(h.complet) }; it.tempsJoue = num(it.tempsJoue) || 0; }
     else { str(it, 'serie', null); it.tome = num(it.tome); }
     return it; });
@@ -670,6 +680,7 @@ function parseData(text) {
   str(d.profil, 'pseudo', null); d.profil.pseudo ??= 'Shiwo';
   if (!('avatar' in d.profil)) d.profil.avatar = DEFAULT_AVATAR;
   else if (d.profil.avatar != null && !/^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(d.profil.avatar)) d.profil.avatar = null;
+  if (d.meta.migrations != null && !(Array.isArray(d.meta.migrations) && d.meta.migrations.every(x => typeof x === 'string'))) d.meta.migrations = [];
   if (d.meta.derniereSauvegarde != null && !/^\d{4}-\d{2}-\d{2}$/.test(d.meta.derniereSauvegarde)) delete d.meta.derniereSauvegarde;
   return d;
 }
@@ -1189,6 +1200,42 @@ function heroPick(x) {
         <button class="btn ${it.statut === 'en_cours' ? 'primary' : ''}" data-act="finish" data-cat="${x.cat}" data-id="${it.id}">${ic('check')}Terminer</button>
         <button class="btn ghost" data-act="open" data-cat="${x.cat}" data-id="${it.id}">Détails</button></div></div></article>`;
 }
+/* — « En cours » : ce qui est réellement commencé, pas une suggestion — */
+/** Jeux en cours, du dernier joué (temps ajouté) au plus ancien. */
+function enCoursJeux() {
+  return blk('JEUX').filter(g => g.statut === 'en_cours').sort((a, b) => (b.joueLe || '').localeCompare(a.joueLe || '') || (b.commenceLe || '').localeCompare(a.commenceLe || '') || (b.tempsJoue || 0) - (a.tempsJoue || 0));
+}
+/** BD / romans en cours, du dernier commencé au plus ancien. */
+function enCoursLecture(cat) {
+  return blk(cat).filter(b => b.statut === 'en_cours').sort((a, b) => (b.commenceLe || '').localeCompare(a.commenceLe || '') || (b.ajouteLe || '').localeCompare(a.ajouteLe || ''));
+}
+const fmtAgo = iso => { if (!iso) return ''; const d = daysSince(iso.slice(0, 10)); return d <= 0 ? 'aujourd’hui' : d === 1 ? 'hier' : d < 7 ? `il y a ${d} jours` : 'le ' + fmtDate(iso.slice(0, 10)); };
+function heroGame() {
+  const l = enCoursJeux(), g = l[0];
+  if (!g) return `<article class="pick glass k-JEUX pick-empty"><div class="dial idle">${ic('gamepad')}</div>
+    <div><div class="eyebrow">${ic('play')}En cours · jeu vidéo</div><h2>Aucun jeu en cours</h2>
+      <p class="muted" style="margin:6px 0 16px">Ajoute du temps de jeu à un jeu, ou commence-en un depuis Jeux vidéo : il apparaîtra ici.</p>
+      <div class="row"><button class="btn primary" data-act="go" data-v="jeux">${ic('gamepad')}Voir mes jeux</button></div></div></article>`;
+  const r = refH(g), p = pctGame(g), x = scoreMap('JEUX').get(g.id), kr = refKey(g);
+  const others = l.slice(1, 4);
+  return `<article class="pick glass k-JEUX">
+    <div class="dial">${ring({ size: 148, stroke: 11, value: p, cat: 'JEUX', label: 'Avancement ' + fmtPct(p) })}<div class="v"><b class="num">${r != null ? Math.round(p * 100) : '—'}<small>${r != null ? '%' : ''}</small></b><span>joué</span></div></div>
+    <div style="min-width:0"><div class="eyebrow">${ic('play')}En cours · jeu vidéo${g.joueLe ? ` · dernière session ${fmtAgo(g.joueLe)}` : ''}</div>
+      <h2>${esc(g.titre)}</h2><div class="metas">${x ? itemMetas(x) : ''}</div>
+      <p class="prog-line">${r != null ? `<b class="num">${fmtH(g.tempsJoue || 0)}</b> jouées sur <b class="num">${fmtH(r)}</b> (${HLTB_LONG[kr]})` : `<b class="num">${fmtH(g.tempsJoue || 0)}</b> jouées · durée inconnue`}</p>
+      <div class="row"><button class="btn primary" data-act="addh" data-id="${g.id}">${ic('clock')}+1 h</button>
+        <button class="btn" data-act="finish" data-cat="JEUX" data-id="${g.id}">${ic('check')}Terminer</button>
+        <button class="btn ghost" data-act="open" data-cat="JEUX" data-id="${g.id}">Détails</button></div>
+      ${others.length ? `<div class="also"><span class="faint">Aussi en cours :</span>${others.map(o => `<button class="chip" data-act="open" data-cat="JEUX" data-id="${o.id}">${esc(o.titre)}</button>`).join('')}${l.length > 4 ? `<span class="faint">+${l.length - 4}</span>` : ''}</div>` : ''}</div></article>`;
+}
+function miniReading(cat) {
+  const l = enCoursLecture(cat), b = l[0], c = CATS[cat], page = cat === 'BD' ? 'bd' : 'romans';
+  if (!b) return `<article class="mini glass k-${cat} mini-empty" data-act="go" data-v="${page}" tabindex="0" role="button"><div class="mdot">${ic(c.icon)}</div>
+    <div><div class="faint" style="font-size:.78rem;color:var(--acc)">${c.court} · en cours</div><h3>Aucune lecture en cours</h3><div class="faint" style="font-size:.82rem">Commence ${cat === 'BD' ? 'une BD' : 'un roman'} depuis ${c.label} pour le retrouver ici.</div></div></article>`;
+  return `<article class="mini glass k-${cat}" data-act="open" data-cat="${cat}" data-id="${b.id}" tabindex="0" role="button"><div class="mdot on">${ic(c.icon)}</div>
+    <div style="min-width:0"><div class="faint" style="font-size:.78rem;color:var(--acc)">${c.court} · en cours${b.commenceLe ? ' depuis ' + fmtAgo(b.commenceLe).replace(/^le /, 'le ') : ''}</div><h3>${esc(b.titre)}</h3>
+      <div class="metas" style="margin:0">${b.serie ? `<span class="pill">${esc(b.serie)}</span>` : ''}${b.tome != null ? `<span class="pill">Tome ${b.tome}</span>` : ''}${l.length > 1 ? `<span class="pill">+${l.length - 1} autre${l.length > 2 ? 's' : ''} en cours</span>` : ''}</div></div></article>`;
+}
 function miniPick(x) {
   const it = x.it;
   return `<article class="mini glass k-${x.cat}" data-act="open" data-cat="${x.cat}" data-id="${it.id}" tabindex="0" role="button">
@@ -1214,7 +1261,6 @@ function monthsChart(y, width) {
 }
 VIEWS.accueil = function () {
   const ov = overview(), g = ov.jeux, d = S.data;
-  const picks = CAT_LIST.map(suggestion).filter(Boolean).sort((a, b) => b.score - a.score);
   const hour = NOW.getHours(), hello = hour < 5 || hour >= 18 ? 'Bonsoir' : 'Bonjour';
   const dateTxt = NOW.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   // répartitions du backlog jeux
@@ -1224,8 +1270,7 @@ VIEWS.accueil = function () {
   const prioCol = { 1: 'var(--c-jeux)', 2: 'color-mix(in srgb,var(--c-jeux) 62%,transparent)', 3: 'color-mix(in srgb,var(--c-jeux) 32%,transparent)' };
   const pr = d.profil, who = pr.pseudo ? `${hello}, <span class="pseudo">${esc(pr.pseudo)}</span>` : hello;
   return `<header class="page-head hello">${pr.avatar ? `<img class="avatar" src="${esc(pr.avatar)}" alt="Avatar de ${esc(pr.pseudo || 'toi')}">` : ''}<div style="min-width:0"><h1>${who}</h1><p class="sub">${dateTxt} · ${fmtPct(yearFrac(YEAR))} de l’année écoulée</p></div><div class="row"><button class="btn" data-act="goals">${ic('target')}Objectifs ${YEAR}</button></div></header>
-  ${picks.length ? `<section class="hero">${heroPick(picks[0])}<div class="mini-picks">${picks.slice(1).map(miniPick).join('')}</div></section>`
-    : empty('sparkle', 'Le backlog est vide : bravo, ou presque. Ajoute un jeu, une BD ou un roman pour le remplir de nouveau.')}
+  <section class="hero">${heroGame()}<div class="mini-picks">${miniReading('BD')}${miniReading('ROMAN')}</div></section>
   <div class="sec-title"><h2>Objectifs ${YEAR}</h2><p>Le trait clair sur l’anneau marque où tu devrais en être à cette date.</p></div>
   <section class="grid g3">${CAT_LIST.map(objCard).join('')}</section>
   <div class="sec-title"><h2>Backlog en chiffres</h2></div>
@@ -1313,7 +1358,7 @@ function tableJeux(l, rk) {
       return `<tr><td class="num faint c-n">${rk.get(g.id)}</td>
         <td class="c-t"><button class="tlink" data-act="open" data-cat="JEUX" data-id="${g.id}">${esc(g.titre)}</button>${g.statut === 'en_cours' ? ' <span class="pill s-en_cours mini-pill">En cours</span>' : ''}<span class="sub always"><i class="pdot" style="--pc:${platColor(g.plateforme)}"></i>${esc(g.plateforme || '—')}</span></td>
         <td class="opt">${g.priorite ? `<span class="pill p${g.priorite}">${ic('flame')}${esc(prioLabel(g.priorite))}</span>` : ''}</td>
-        ${HLTB_KEYS.map(k => `<td class="opt c-h"><span class="hltb mini">${hltbCell(g, k, '', kr)}</span></td>`).join('')}
+        ${HLTB_KEYS.map(k => `<td class="opt c-h"><span class="hltb hmini">${hltbCell(g, k, '', kr)}</span></td>`).join('')}
         <td class="opt2"><div class="pbar"><div class="bar"><i style="--w:${p * 100}%;--col:var(--c-jeux)"></i></div><span class="num">${fmtH(g.tempsJoue || 0)} · ${refH(g) != null ? fmtPct(p) : '—'}</span></div></td>
         <td class="num">${x.rest != null ? fmtH(x.rest) : '—'}</td>${scoreCell(x, 'JEUX')}
         <td class="c-act"><div class="row" style="gap:4px;flex-wrap:nowrap;justify-content:flex-end"><button class="btn sm primary icon" data-act="finish" data-cat="JEUX" data-id="${g.id}" title="Terminer" aria-label="Terminer">${ic('check')}</button><button class="btn sm opt-l" data-act="addh" data-id="${g.id}" title="Ajouter 1 h de jeu">+1 h</button><button class="btn sm icon ghost" data-act="edit" data-cat="JEUX" data-id="${g.id}" title="Modifier" aria-label="Modifier">${ic('edit')}</button></div></td></tr>`; }).join('')}
@@ -2088,10 +2133,13 @@ FORMS.item = (fd, f) => {
   const cat = f.dataset.cat, id = f.dataset.id, titre = fd.get('titre').trim(); if (!titre) return;
   snap();
   const it = id ? findItem(cat, id) : { id: nextId({ JEUX: 'g', BD: 'b', ROMAN: 'r' }[cat], blk(cat)), ajouteLe: isoDate() };
+  const wasStatut = it.statut, wasTime = it.tempsJoue || 0;
   it.titre = titre; it.statut = fd.get('statut');
   it.priorite = fd.get('priorite') === '' ? null : +fd.get('priorite');
-  if (cat === 'JEUX') { it.plateforme = fd.get('plateforme').trim().toUpperCase(); it.hltb = { main: numOrNull(fd.get('main')), mainPlus: numOrNull(fd.get('mainPlus')), complet: numOrNull(fd.get('complet')) }; it.tempsJoue = numOrNull(fd.get('tempsJoue')) || 0; const ob = fd.get('objectif'); if (HLTB_KEYS.includes(ob)) it.objectif = ob; else delete it.objectif; if (it.tempsJoue > 0 && it.statut === 'non_commence') it.statut = 'en_cours'; }
+  if (cat === 'JEUX') { it.plateforme = fd.get('plateforme').trim().toUpperCase(); it.hltb = { main: numOrNull(fd.get('main')), mainPlus: numOrNull(fd.get('mainPlus')), complet: numOrNull(fd.get('complet')) }; it.tempsJoue = numOrNull(fd.get('tempsJoue')) || 0; const ob = fd.get('objectif'); if (HLTB_KEYS.includes(ob)) it.objectif = ob; else delete it.objectif; if (it.tempsJoue > 0 && it.statut === 'non_commence') it.statut = 'en_cours'; if (it.tempsJoue !== wasTime) it.joueLe = new Date().toISOString(); }
   else { it.serie = fd.get('serie').trim() || null; it.tome = numOrNull(fd.get('tome')); }
+  if (it.statut === 'en_cours' && wasStatut !== 'en_cours') it.commenceLe = isoDate();
+  if (it.statut !== 'en_cours') delete it.commenceLe;
   if (!id) blk(cat).push(it);
   closeModal(); commit(id ? 'Modifications enregistrées' : `« ${titre} » ajouté au backlog`, true);
 };
@@ -2617,6 +2665,31 @@ FEAT_ACT['hltb-clip'] = async () => {
   catch { toast('Le navigateur refuse la lecture du presse-papiers : colle le texte dans le champ (appui long > Coller).'); }
 };
 
+/* ───────────── Mises à jour ponctuelles des données (une seule fois, marquées dans meta.migrations) ───────────── */
+const MIGRATIONS = [
+  { id: 'abos-2026-10-23', label: 'abonnements ajoutés', run: d => {
+    const add = [
+      { service: 'ChatGPT Plus', statut: 'abonne', prix: 22.99, periodicite: 'mensuel', echeance: null, renouvelable: true },
+      { service: 'Claude Pro', statut: 'abonne', prix: 22.00, periodicite: 'mensuel', echeance: null, renouvelable: true },
+      { service: 'Canal+', statut: 'abonne', prix: 2.00, periodicite: 'mensuel', echeance: null, renouvelable: true },
+      { service: 'Ring', statut: 'abonne', prix: 99.99, periodicite: 'annuel', echeance: '2027-08-07', renouvelable: true },
+      { service: 'Basic-Fit', statut: 'abonne', prix: 22.99, periodicite: 'mensuel', echeance: null, renouvelable: true },
+      { service: 'AllDebrid', statut: 'abonne', prix: 2.99, periodicite: 'mensuel', echeance: null, renouvelable: true },
+    ];
+    const key = s => norm(s).replace(/[^a-z0-9]/g, ''), have = new Set(d.abonnements.map(a => key(a.service)));
+    const added = add.filter(a => !have.has(key(a.service))); d.abonnements.push(...added);
+    return added.length ? `${added.length} abonnements ajoutés : ${added.map(a => a.service).join(', ')}` : null;
+  } },
+];
+/** Applique les mises à jour pas encore faites sur ces données, puis enregistre (et synchronise). */
+function applyMigrations() {
+  const d = S.data; if (!d) return;
+  d.meta.migrations = Array.isArray(d.meta.migrations) ? d.meta.migrations : [];
+  const msgs = []; let ran = false;
+  for (const m of MIGRATIONS) if (!d.meta.migrations.includes(m.id)) { const r = m.run(d); d.meta.migrations.push(m.id); ran = true; if (r) msgs.push(r); }
+  if (ran) commit(msgs.length ? msgs.join(' · ') : null);   // enregistre aussi le marqueur, pour ne jamais rejouer
+}
+
 /* ═══════════════════════════════════════════════════════════════════════
    G. ACTIONS, ÉVÉNEMENTS & DÉMARRAGE
    Les boutons portent data-act="nom" ; ACT[nom] est appelée par la délégation.
@@ -2650,8 +2723,8 @@ const ACT = {
   add: d => itemForm(d.cat),
   edit: d => itemForm(d.cat, d.id),
   finish: d => finishForm(d.cat, d.id),
-  start: d => { snap(); const it = findItem(d.cat, d.id); it.statut = 'en_cours'; closeModal(); commit(`« ${it.titre} » est en cours`, true); },
-  addh: d => { snap(); const g = findItem('JEUX', d.id); g.tempsJoue = Math.round(((g.tempsJoue || 0) + 1) * 10) / 10; if (g.statut === 'non_commence') g.statut = 'en_cours'; commit(`+1 h sur « ${g.titre} » (${fmtH(g.tempsJoue)})`, true); },
+  start: d => { snap(); const it = findItem(d.cat, d.id); it.statut = 'en_cours'; it.commenceLe = isoDate(); closeModal(); commit(`« ${it.titre} » est en cours`, true); },
+  addh: d => { snap(); const g = findItem('JEUX', d.id); g.tempsJoue = Math.round(((g.tempsJoue || 0) + 1) * 10) / 10; g.joueLe = new Date().toISOString(); if (g.statut === 'non_commence') { g.statut = 'en_cours'; g.commenceLe = isoDate(); } commit(`+1 h sur « ${g.titre} » (${fmtH(g.tempsJoue)})`, true); },
   del: d => { snap(); const arr = blk(d.cat), i = arr.findIndex(x => x.id === d.id), [it] = arr.splice(i, 1); closeModal(); commit(`« ${it.titre} » supprimé du backlog`, true); },
   goals: () => goalsModal(),
   'stats-cat': d => { S.stats.cat = d.v; render(); },
@@ -2804,7 +2877,7 @@ function start(d) {
       $('#dr-no').onclick = () => { localStorage.removeItem('cockpit.draft'); $('#banner').innerHTML = ''; };
     }
   } catch { /* brouillon illisible : ignoré */ }
-  paintSave(); render(); paintNotices();
+  paintSave(); render(); paintNotices(); applyMigrations();
 }
 (async function boot() {
   applyTheme();
